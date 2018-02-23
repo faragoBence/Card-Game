@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cards>
+    <Minions>
+        <Minion name="GrimScale Chum" description="Murloc" manacost="1" attack="2" health="1"/>
+        <Minion name="Murloc Tidecaller" description="Murloc" manacost="1" attack="1" health="2"/>
+        <Minion name="Rightous Protector" description="xy" manacost="1" attack="2" health="2"/>
+        <Minion name="Vilefin Inquisitor" description="Murloc" manacost="1" attack="1" health="3"/>
+        <Minion name="Hidroglyst" description="Murloc" manacost="2" attack="2" health="2"/>
+        <Minion name="Rockpool Hunter" description="Murloc" manacost="2" attack="2" health="3"/>
+        <Minion name="Coldlight Seer" description="Murloc" manacost="3" attack="2" health="3"/>
+        <Minion name="Murloc Warleader" description="Murloc" manacost="3" attack="3" health="3"/>
+        <Minion name="SunKeeper Tarim" description="beast" manacost="6" attack="3" health="7"/>
+        <Minion name="Spellbreaker" description="xy" manacost="4" attack="4" health="3"/>
+        <Minion name="Gentle Megasaur" description="beast" manacost="4" attack="5" health="4"/>
+        <Minion name="Knife Juggler" description="dwarf" manacost="2" attack="2" health="2"/>
+        <Minion name="LightFused Stegodon" description="beast" manacost="4" attack="3" health="4"/>
+        <Minion name="Dire Wolf" description="beast" manacost="2" attack="2" health="2"/>
+        <Minion name="Argent Squire" description="warrior" manacost="1" attack="1" health="1"/>
+        <Minion name="Barnes" description="xy" manacost="4" attack="3" health="4"/>
+        <Minion name="Ysera" description="dragon" manacost="9" attack="4" health="10"/>
+        <Minion name="Y'shaarj" description="dragon" manacost="10" attack="7" health="8"/>
+        <Minion name="Despicable Dreadlord" description="void" manacost="5" attack="4" health="5"/>
+        <Minion name="Leeroy Jenkins" description="xy" manacost="5" attack="6" health="2"/>
+        <Minion name="Doom Guard" description="void" manacost="5" attack="5" health="7"/>
+    </Minions>
+    <MagicCards>
+        <MagicCard name="Divine Favor" description="Draw 3 cards" manacost="3"/>
+        <MagicCard name="Blessing of Kings" description="Give 2 health and attack to a minion" manacost="4"/>
+        <MagicCard name="Level Up!" description="Give 1 health and attack to a minion" manacost="2"/>
+        <MagicCard name="Equality" description="Make 1 a minion's health" manacost="1"/>
+        <MagicCard name="Fireball" description="Do 6 damage to a minion" manacost="4"/>
+        <MagicCard name="Life stream" description="Restore 4 amount of health to the target" manacost="2"/>
+        <MagicCard name="Holy Light" description="Restore 10 amount of health to the target" manacost="8"/>
+        <MagicCard name="Holy Smite" description="Do 2 damage to a minion" manacost="1"/>
+        <MagicCard name="Growing" description="Set 4 to a minion's health" manacost="3"/>
+    </MagicCards>
+</Cards>

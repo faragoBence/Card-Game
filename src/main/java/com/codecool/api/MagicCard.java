@@ -1,6 +1,8 @@
 package com.codecool.api;
 
-import com.codecool.api.exceptions.*;
+import com.codecool.api.exceptions.EntityIsDeadException;
+import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
+import com.codecool.api.exceptions.WrongTargetException;
 
 public class MagicCard extends Card implements Magic {
 
@@ -8,7 +10,7 @@ public class MagicCard extends Card implements Magic {
         super(name, health, description, manaCost);
     }
 
-    public void drawCard(Player player, int amount) throws EntityIsDeadException {
+    public void drawCard(Player player, int amount) {
         for (int i = 0; i < amount; i++) {
             player.cardDraw();
         }
@@ -22,7 +24,7 @@ public class MagicCard extends Card implements Magic {
         target.setHealth(amount);
     }
 
-    public void doDamage(Entity target, int amount) throws EntityIsDeadException {
+    public void doDamage(Entity target, int amount) {
         target.takeDamage(amount);
     }
 
@@ -32,7 +34,14 @@ public class MagicCard extends Card implements Magic {
         target.setAttack(target.getAttack() + amount);
     }
 
-    public void doMagic(Entity entity) throws EntityIsDeadException, WrongTargetException {
+    @Override
+    public void summon(Player target, int amount, Minion minion) throws NoMoreRoomOnDeskException {
+        for (int i = 0; i < amount; i++) {
+            target.placeWithoutMana(minion);
+        }
+    }
+
+    public void doMagic(Entity entity) throws EntityIsDeadException, WrongTargetException, NoMoreRoomOnDeskException {
         String[] args = getDescription().split(" ");
         int amount = Integer.parseInt(args[1]);
         switch (args[0]) {
@@ -63,6 +72,11 @@ public class MagicCard extends Card implements Magic {
             case "Restore":
                 heal(entity, amount);
                 break;
+            case "Summon":
+                if (!(entity instanceof Player)) {
+                    throw new WrongTargetException();
+                }
+                summon(((Player) entity), amount, new Minion(args[2], Integer.parseInt(args[4]), "Summoned", 0, Integer.parseInt(args[7])));
         }
         takeDamage(1);
     }

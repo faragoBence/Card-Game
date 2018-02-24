@@ -1,39 +1,37 @@
 package com.codecool.api.datamanager;
 
-import com.codecool.api.*;
-
-
-// XML Structure
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.ParserConfigurationException;
-
+import com.codecool.api.Card;
+import com.codecool.api.MagicCard;
+import com.codecool.api.Minion;
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
-
 import java.io.IOException;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+// XML Structure
 
 
-public class CardParser {
-    private String xmlPath;
+public class CardParser implements Parser {
+    private final String xmlPath;
     private Document document;
-    private List<Card> cards = new ArrayList<>();
-    private List<Minion> minions = new ArrayList<>();
-    private List<MagicCard> magicCards = new ArrayList<>();
+    private final List<Card> cards = new ArrayList<>();
+    private final List<Minion> minions = new ArrayList<>();
+    private final List<MagicCard> magicCards = new ArrayList<>();
 
 
     // Constructor(s)
     public CardParser(String xmlPath) {
         this.xmlPath = xmlPath;
         initDocument();
-        readCards();
+        readFile();
     }
 
 
@@ -51,7 +49,7 @@ public class CardParser {
     }
 
     // Method(s)
-    private void initDocument() {
+    public void initDocument() {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -62,7 +60,7 @@ public class CardParser {
         }
     }
 
-    private void readCards() {
+    public void readFile() {
         Element minionsElement = (Element) document.getElementsByTagName("Minions").item(0);
         NodeList minions = minionsElement.getElementsByTagName("Minion");
 

@@ -1,7 +1,6 @@
 package com.codecool.api;
 
-import com.codecool.api.datamanager.CardParser;
-import com.codecool.api.exceptions.EntityIsDeadException;
+import com.codecool.api.datamanager.HeroParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,48 +8,40 @@ import java.util.Random;
 
 public class Board {
 
-    List<Card> deck;
-    Player player1;
-    Player player2;
-    Random random = new Random();
+    private final Player player1;
+    private final Player player2;
+    private final Random random = new Random();
+
+    private List<Hero> heroes;
 
     public Board(Player player1, Player player2) {
-        deck = new CardParser("src/main/resources/cardcollection.xml").getCards();
         this.player1 = player1;
         this.player2 = player2;
+        createHeroList();
     }
 
-    public List<Card> getDeck() {
-        return deck;
+    public List<Hero> getHeroes() {
+        return heroes;
     }
 
-    public void makeDecks(Player player) {
-        int rand = random.nextInt(deck.size());
-        Card card = deck.get(rand);
-        card.setOwner(player);
-        player.addToDeck(card);
-        deck.remove(card);
-    }
-
-    public void makeHand(Player player) throws EntityIsDeadException {
+    private void makeHand(Player player) {
         for (int i = 0; i < 2; i++) {
             player.cardDraw();
         }
     }
 
-    public void start() throws EntityIsDeadException {
-        Player player = player1;
-        while (deck.size() != 0) {
-            makeDecks(player);
-            if (player.equals(player1)) {
-                player = player2;
-            } else {
-                player = player1;
-            }
-        }
+    public void start() {
+        player1.deckCreating();
+        player2.deckCreating();
         makeHand(player1);
         makeHand(player2);
+
     }
+
+    private void createHeroList() {
+        heroes = new HeroParser().getHeroes();
+    }
+
 
     public void clearField(Player player) {
         List<Card> desk = player.getDesk();
@@ -63,10 +54,10 @@ public class Board {
 
     public void changeAttackState(Player player) {
         List<Card> desk = player.getDesk();
-        for (int i = 0; i < desk.size(); i++) {
-            if (desk.get(i) instanceof Minion) {
-                if (!((Minion) desk.get(i)).canAttack()) {
-                    ((Minion) desk.get(i)).setCanAttack(true);
+        for (Card aDesk : desk) {
+            if (aDesk instanceof Minion) {
+                if (!((Minion) aDesk).canAttack()) {
+                    ((Minion) aDesk).setCanAttack(true);
                 }
             }
         }

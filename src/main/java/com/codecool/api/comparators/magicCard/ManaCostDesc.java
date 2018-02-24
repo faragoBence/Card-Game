@@ -4,7 +4,7 @@ import com.codecool.api.MagicCard;
 
 import java.util.Comparator;
 
-public class ManaCostDesc implements Comparator<MagicCard> {
+class ManaCostDesc implements Comparator<MagicCard> {
 
     @Override
     public int compare(MagicCard o1, MagicCard o2) {

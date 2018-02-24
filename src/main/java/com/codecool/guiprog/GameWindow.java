@@ -2,7 +2,6 @@ package com.codecool.guiprog;
 
 import com.codecool.api.Board;
 import com.codecool.api.Player;
-import com.codecool.api.exceptions.EntityIsDeadException;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -37,30 +37,33 @@ public class GameWindow extends Application {
     ImageView nextPic = new ImageView();
 
     // Game Window
-    static Stage primaryStage;
-    Parent root;
-    static Scene scene;
+    private static Stage primaryStage;
+    private static Scene scene;
+    private static List<Pane> hand;
     @FXML
     Button EndTurn = new Button();
-
-    static List<Pane> hand;
+    @FXML
+    private final Pane eDesk5 = new Pane();
     @FXML
     static Pane hand1, hand2, hand3, hand4, hand5 = new Pane();
     @FXML static ImageView Image1 = new ImageView();
-
-    List<Pane> desk;
+    @FXML
+    Pane eDesk1;
     @FXML
     Pane desk1, desk2, desk3, desk4, desk5 = new Pane();
-
-    List<Pane> eDesk;
     @FXML
-    Pane eDesk1, eDesk2, eDesk3, eDesk4, eDesk5 = new Pane();
-
-
+    Pane eDesk2;
+    @FXML
+    Pane eDesk3;
+    @FXML
+    Pane eDesk4;
+    private Parent root;
+    private List<Pane> desk;
+    private List<Pane> eDesk;
     // Game data
-    Player player1;
-    Player player2;
-    Board board;
+    private Player player1;
+    private Player player2;
+    private Board board;
 
     public static void main(String[] args) {
         launch(args);
@@ -76,12 +79,12 @@ public class GameWindow extends Application {
         GameWindow.primaryStage.show();
     }
 
-    public void change(String path) throws IOException {
+    private void change(String path) throws IOException {
         root = FXMLLoader.load(getClass().getResource(path));
         scene.setRoot(root);
     }
 
-    public void alert(String alertMessage) {
+    private void alert(String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(alertMessage);
         alert.show();
@@ -103,15 +106,11 @@ public class GameWindow extends Application {
         player1 = new Player(player1Field.getText(), 20);
         player2 = new Player(player2Field.getText(), 20);
         board = new Board(player1, player2);
-        try {
             board.start();
             change("/GameWindow.fxml");
             initHand();
             initDesk();
             initEDesk();
-        } catch (EntityIsDeadException ex) {
-            alert("Entity is dead!");
-        }
     }
 
     private void initHand() throws IOException {
@@ -127,21 +126,6 @@ public class GameWindow extends Application {
         change("/GameWindow.fxml");
     }
 
-    private void refreshHand() {
-        System.out.println(hand.size());
-        System.out.println(player1.getHand().size());
-        for(int i = 0; i < hand.size(); i++) {
-            System.out.println(hand.get(i).getChildren().size());
-            if (i <= player1.getHand().size() && player1.getHand().get(i) != null) {
-                ((ImageView) hand.get(i).getChildren().get(0)).setImage(
-                        player1.getHand().get(i).getCardImg()
-                );
-            } else {
-                ((ImageView) hand.get(i).getChildren().get(0)).setImage((null));
-            }
-        }
-    }
-
     private void initDesk() {
         desk = new ArrayList<>();
         desk.add(desk1);
@@ -149,18 +133,6 @@ public class GameWindow extends Application {
         desk.add(desk3);
         desk.add(desk4);
         desk.add(desk5);
-    }
-
-    private void refreshDesk() {
-        for(int i = 0; i < desk.size(); i++) {
-            if (player1.getHand().get(i) != null ) {
-                ((ImageView) desk.get(i).getChildren().get(0)).setImage(
-                        player1.getHand().get(i).getCardImg()
-                );
-            } else {
-                ((ImageView) desk.get(i).getChildren().get(0)).setImage((null));
-            }
-        }
     }
 
     private void initEDesk() {
@@ -172,17 +144,6 @@ public class GameWindow extends Application {
         eDesk.add(eDesk5);
     }
 
-    private void refreshEDesk() {
-        for(int i = 0; i < eDesk.size(); i++) {
-            if (player2.getDesk().get(i) != null ) {
-                ((ImageView) eDesk.get(i).getChildren().get(0)).setImage(
-                        player2.getHand().get(i).getCardImg()
-                );
-            } else {
-                ((ImageView) eDesk.get(i).getChildren().get(0)).setImage((null));
-            }
-        }
-    }
 
 
     // Game Screen - Method(s)
@@ -195,7 +156,7 @@ public class GameWindow extends Application {
 
 
     // FXML Effects
-    public DropShadow glow() {
+    private DropShadow glow() {
         DropShadow shadow = new DropShadow();
         shadow.setColor(Color.YELLOW);
         shadow.setRadius(33);

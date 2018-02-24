@@ -1,6 +1,8 @@
 package com.codecool.api;
 
-import com.codecool.api.exceptions.*;
+import com.codecool.api.exceptions.EntityIsDeadException;
+import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
+import com.codecool.api.exceptions.NotEnoughManaException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +12,11 @@ public class Player extends Entity {
 
     private int currentMana = 0;
     private int maxMana = 0;
-    private final int MANACAP = 10;
-
-    private List<Card> hand = new ArrayList<>();
-    private List<Card> desk = new ArrayList<>();
+    private final List<Card> hand = new ArrayList<>();
+    private final List<Card> desk = new ArrayList<>();
+    int MANACAP = 10;
     private List<Card> deck = new ArrayList<>();
+    private Hero hero;
 
     // Constructor(s)
     public Player(String name, int health) {
@@ -24,10 +26,6 @@ public class Player extends Entity {
     // Getter(s)
     public int getMana() {
         return currentMana;
-    }
-
-    public int getMaxMana() {
-        return maxMana;
     }
 
     public List<Card> getHand() {
@@ -42,6 +40,15 @@ public class Player extends Entity {
         return deck;
     }
 
+    private Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+
     // Method(s)
     public void manageMana() throws EntityIsDeadException {
         checkIfAlive();
@@ -55,7 +62,7 @@ public class Player extends Entity {
         deck.add(card);
     }
 
-    public void cardDraw() throws EntityIsDeadException {
+    public void cardDraw() {
         if (deck.size() > 0) {
             Card draw = deck.get(0);
             deck.remove(draw);
@@ -70,6 +77,11 @@ public class Player extends Entity {
     public void startRound() throws EntityIsDeadException {
         manageMana();
         cardDraw();
+    }
+
+    public void deckCreating() {
+        getHero().importAndShuffle();
+        deck = getHero().getDeck();
     }
 
     public void placeCard(int index) throws NoMoreRoomOnDeskException, NotEnoughManaException {
@@ -87,12 +99,21 @@ public class Player extends Entity {
         }
     }
 
+    public void placeWithoutMana(Card card) throws NoMoreRoomOnDeskException {
+        if (desk.size() < 5) {
+            desk.add(card);
+        } else {
+            throw new NoMoreRoomOnDeskException();
+        }
+    }
+
     @Override
     public String toString() {
         return "name= " + getName() +
                 ", health= " + getHealth() +
                 ", currentMana= " + currentMana +
                 ", maxMana= " + maxMana +
+                ", Hero = " + hero.getName() +
                 "\nAmount of cards in deck: " + deck.size();
     }
 
@@ -103,4 +124,6 @@ public class Player extends Entity {
         Player player = (Player) o;
         return Objects.equals(getName(), player.getName());
     }
+
+
 }

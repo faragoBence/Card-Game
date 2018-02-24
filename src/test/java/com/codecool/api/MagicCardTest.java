@@ -1,6 +1,7 @@
 package com.codecool.api;
 
 import com.codecool.api.exceptions.EntityIsDeadException;
+import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
 import com.codecool.api.exceptions.WrongTargetException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ class MagicCardTest {
     }
 
     @Test
-    void drawCard() throws EntityIsDeadException, WrongTargetException {
+    void drawCard() throws EntityIsDeadException, WrongTargetException, NoMoreRoomOnDeskException {
         magicCard = new MagicCard("Divine Favor", 1, "Draw 3 cards", 3);
         for (int i = 0; i < 4; i++) {
             player.addToDeck(minion);
@@ -37,7 +38,7 @@ class MagicCardTest {
     }
 
     @Test
-    void heal() throws EntityIsDeadException, WrongTargetException {
+    void heal() throws EntityIsDeadException, WrongTargetException, NoMoreRoomOnDeskException {
         magicCard = new MagicCard("Divine Favor", 1, "Restore 4 amount of health to the target", 3);
 
         player.takeDamage(10);
@@ -55,7 +56,7 @@ class MagicCardTest {
     }
 
     @Test
-    void setHealth() throws EntityIsDeadException, WrongTargetException {
+    void setHealth() throws EntityIsDeadException, WrongTargetException, NoMoreRoomOnDeskException {
         magicCard = new MagicCard("Divine Favor", 1, "Make 1 a minion's health", 3);
 
         assertThrows(WrongTargetException.class, () -> magicCard.doMagic(player));
@@ -71,7 +72,7 @@ class MagicCardTest {
     }
 
     @Test
-    void doDamage() throws EntityIsDeadException, WrongTargetException {
+    void doDamage() throws EntityIsDeadException, WrongTargetException, NoMoreRoomOnDeskException {
         magicCard = new MagicCard("Divine Favor", 1, "Do 6 damage to a minion", 3);
 
         assertThrows(WrongTargetException.class, () -> magicCard.doMagic(player));
@@ -83,7 +84,7 @@ class MagicCardTest {
     }
 
     @Test
-    void setHealthAndDamage() throws EntityIsDeadException, WrongTargetException {
+    void setHealthAndDamage() throws EntityIsDeadException, WrongTargetException, NoMoreRoomOnDeskException {
         magicCard = new MagicCard("Divine Favor", 1, "Give 2 health and attack to a minion", 3);
 
         assertThrows(WrongTargetException.class, () -> magicCard.doMagic(player));
@@ -92,5 +93,17 @@ class MagicCardTest {
         magicCard.doMagic(minion);
         assertEquals(4, minion.getHealth());
         assertEquals(4, minion.getAttack());
+    }
+
+    @Test
+    void summon() throws NoMoreRoomOnDeskException, EntityIsDeadException, WrongTargetException {
+        magicCard = new MagicCard("Recruiting", 1, "Summon 2 Recruit with 1 health and 1 attack", 3);
+        assertThrows(WrongTargetException.class, () -> magicCard.doMagic(minion));
+
+        magicCard.doMagic(player);
+        assertEquals(2, player.getDesk().size());
+        assertEquals("Recruit", player.getDesk().get(0).getName());
+        assertEquals("Summoned", player.getDesk().get(0).getDescription());
+        assertEquals(0, player.getDesk().get(0).getManaCost());
     }
 }

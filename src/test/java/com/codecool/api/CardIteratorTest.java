@@ -1,5 +1,6 @@
 package com.codecool.api;
 
+import com.codecool.api.Iterators.CardIterator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

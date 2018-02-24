@@ -1,11 +1,13 @@
-package com.codecool.api;
+package com.codecool.api.Iterators;
+
+import com.codecool.api.Card;
 
 import java.util.Iterator;
 import java.util.List;
 
 public class CardIterator implements Iterator<Card>{
 
-    private List<Card> cards;
+    private final List<Card> cards;
     private int index;
     private final int size;
 

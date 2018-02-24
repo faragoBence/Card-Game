@@ -1,8 +1,6 @@
 package com.codecool.api;
 
 import com.codecool.api.exceptions.EntityIsDeadException;
-import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
-import com.codecool.api.exceptions.NotEnoughManaException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
 
-    Player player;
+    private Player player;
 
     @BeforeEach
     void setUp() {
@@ -71,7 +69,7 @@ class PlayerTest {
     }
 
     @Test
-    void placeCard() throws EntityIsDeadException {
+    void placeCard() {
         Minion card1 = new Minion("testName1", 5, "testDescription1", 2, 3);
         Minion card2 = new Minion("testName2", 8, "testDescription2", 4, 4);
 

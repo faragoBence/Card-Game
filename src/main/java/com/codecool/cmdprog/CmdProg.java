@@ -1,16 +1,20 @@
 package com.codecool.cmdprog;
 
 import com.codecool.api.*;
+import com.codecool.api.Iterators.CardIterator;
+import com.codecool.api.Iterators.HeroIterator;
+import com.codecool.api.Iterators.MagicCardIterator;
+import com.codecool.api.Iterators.MinionIterator;
 import com.codecool.api.exceptions.*;
 
 import java.util.List;
 import java.util.Scanner;
 
-public class CmdProg {
-    Scanner scanner = new Scanner(System.in);
-    Board board;
-    Player currentPlayer;
-    Player enemy;
+class CmdProg {
+    private final Scanner scanner = new Scanner(System.in);
+    private Board board;
+    private Player currentPlayer;
+    private Player enemy;
 
     public void run() {
         System.out.println("Please enter your name!");
@@ -18,14 +22,12 @@ public class CmdProg {
         System.out.println("Please enter the name of the another player");
         enemy = new Player(scanner.nextLine(), 20);
         board = new Board(currentPlayer, enemy);
+        selectHero(currentPlayer);
+        selectHero(enemy);
+        board.start();
         List<Player> list = board.randomizeStart();
         currentPlayer = list.get(0);
         enemy = list.get(1);
-        try {
-            board.start();
-        } catch (EntityIsDeadException ex) {
-            System.out.println("Someone is dead, game ends.");
-        }
         Player temp;
         while (currentPlayer.isAlive() && enemy.isAlive()) {
             boolean roundOver = true;
@@ -67,7 +69,7 @@ public class CmdProg {
         System.out.println("Congratulations! " + winner + " won the game!");
     }
 
-    public boolean commandReader(String[] args) {
+    private boolean commandReader(String[] args) {
         switch (args[0]) {
             case ":place":
                 handlePlace(args);
@@ -87,7 +89,7 @@ public class CmdProg {
         }
     }
 
-    public void printList() {
+    private void printList() {
         System.out.println(":place [card number]");
         System.out.println(":magic [Magic card number target](me,enemy,me 1,enemy 1)");
         System.out.println(":attack [your minion number  enemy minion number]");
@@ -95,7 +97,7 @@ public class CmdProg {
         System.out.println(":end");
     }
 
-    public void handleMagic(String[] args) {
+    private void handleMagic(String[] args) {
         MagicCard magicCard = null;
         try {
             int cardIndex = Integer.parseInt(args[1]);
@@ -103,7 +105,7 @@ public class CmdProg {
                 magicCard = (MagicCard) currentPlayer.getHand().get(cardIndex - 1);
                 if (magicCard.getManaCost() <= currentPlayer.getMana()) {
 
-
+                    currentPlayer.placeCard(cardIndex - 1);
                     switch (args[2]) {
                         case "me":
                             if (args.length < 4) {
@@ -124,7 +126,6 @@ public class CmdProg {
                         default:
                             System.out.println("Wrong input entered");
                     }
-                    currentPlayer.placeCard(cardIndex - 1);
                 } else {
                     throw new NotEnoughManaException();
                 }
@@ -144,7 +145,7 @@ public class CmdProg {
         }
     }
 
-    public void handlePlace(String[] args) {
+    private void handlePlace(String[] args) {
         try {
             int index = Integer.parseInt(args[1]);
             if (currentPlayer.getHand().get(index - 1) instanceof Minion) {
@@ -167,7 +168,7 @@ public class CmdProg {
         }
     }
 
-    public void handleAttack(String[] args) {
+    private void handleAttack(String[] args) {
         try {
             int index1 = Integer.parseInt(args[1]);
             if (args.length > 2) {
@@ -194,7 +195,7 @@ public class CmdProg {
     }
 
 
-    public void listCards(List<Card> cards) {
+    private void listCards(List<Card> cards) {
         CardIterator cardIterator = new CardIterator(cards);
         int num = 1;
         while (cardIterator.hasNext()) {
@@ -204,11 +205,56 @@ public class CmdProg {
 
     }
 
-    public void clearscreen() {
+    public void listMagicCards(List<MagicCard> cards) {
+        MagicCardIterator cardIterator = new MagicCardIterator(cards);
+        int num = 1;
+        while (cardIterator.hasNext()) {
+            System.out.println(Integer.toString(num++) + ") " + cardIterator.next());
+        }
+        System.out.println("------------------------------------------------------------------------------------------");
+
+    }
+
+    public void listMinionCards(List<Minion> cards) {
+        MinionIterator cardIterator = new MinionIterator(cards);
+        int num = 1;
+        while (cardIterator.hasNext()) {
+            System.out.println(Integer.toString(num++) + ") " + cardIterator.next());
+        }
+        System.out.println("------------------------------------------------------------------------------------------");
+
+    }
+
+    private void listHeroes() {
+        HeroIterator heroIterator = new HeroIterator(board.getHeroes());
+        int num = 1;
+        while (heroIterator.hasNext()) {
+            System.out.println(Integer.toString(num++) + ") " + heroIterator.next().getName());
+        }
+        System.out.println("------------------------------------------------------------------------------------------");
+
+    }
+
+
+    private void clearscreen() {
         for (int i = 0; i < 25; i++) {
             System.out.println();
         }
     }
 
+    private void selectHero(Player player) {
+        while (true) {
+            listHeroes();
+            String heroName = scanner.nextLine();
+            try {
+                player.setHero(board.getHeroes().get(Integer.parseInt(heroName) - 1));
+                board.getHeroes().remove(Integer.parseInt(heroName) - 1);
+                break;
+
+            } catch (Exception ex) {
+                System.out.println("Wrong input entered!");
+            }
+        }
+    }
 }
 

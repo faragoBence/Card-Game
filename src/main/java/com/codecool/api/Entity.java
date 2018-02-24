@@ -4,12 +4,12 @@ import com.codecool.api.exceptions.EntityIsDeadException;
 
 public abstract class Entity {
 
-    private String name;
+    private final String name;
     private int health;
     private int healthCap;
     private boolean isAlive = true;
 
-    public Entity(String name, int health) {
+    Entity(String name, int health) {
         this.name = name;
         this.health = health;
         this.healthCap = health;
@@ -27,11 +27,11 @@ public abstract class Entity {
         return isAlive;
     }
 
-    public void increaseHealthCap(int amount) {
+    void increaseHealthCap(int amount) {
         healthCap += amount;
     }
 
-    public void setHealth(int health) {
+    void setHealth(int health) {
         this.health = health;
     }
 
@@ -48,7 +48,7 @@ public abstract class Entity {
         }
     }
 
-    protected void checkIfAlive() throws EntityIsDeadException {
+    void checkIfAlive() throws EntityIsDeadException {
         if (!isAlive) {
             throw new EntityIsDeadException();
         }

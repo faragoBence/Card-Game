@@ -1,7 +1,6 @@
 package com.codecool.api;
 
 import com.codecool.api.exceptions.CanNotAttackException;
-import com.codecool.api.exceptions.EntityIsDeadException;
 import com.codecool.api.exceptions.SelfTargetException;
 
 public class Minion extends Card {
@@ -48,9 +47,14 @@ public class Minion extends Card {
             throw new CanNotAttackException();
         }
     }
-    public void attack(Player player) {
-        player.takeDamage(attack);
-        setCanAttack(false);
+
+    public void attack(Player player) throws CanNotAttackException {
+        if (canAttack) {
+            player.takeDamage(attack);
+            setCanAttack(false);
+        } else {
+            throw new CanNotAttackException();
+        }
     }
 
     @Override

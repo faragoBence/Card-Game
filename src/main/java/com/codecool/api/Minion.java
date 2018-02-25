@@ -1,6 +1,7 @@
 package com.codecool.api;
 
 import com.codecool.api.exceptions.CanNotAttackException;
+import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
 import com.codecool.api.exceptions.SelfTargetException;
 
 public class Minion extends Card {
@@ -81,8 +82,25 @@ public class Minion extends Card {
 
     public void createAbility() {
         String[] desc = getDescription().split(" ");
-        if (desc[0].equals("Battlecry:")) {
+        if (desc[0].equals("Battlecry:") || desc[0].equals("Deathrattle:")) {
             ability = desc[1];
+        }
+    }
+
+    public void useAbility(Entity entity) throws NoMoreRoomOnDeskException {
+        String[] args = getDescription().split(" ");
+        switch (ability) {
+            case "Heal":
+                heal(entity, Integer.parseInt(args[5]));
+                break;
+            case "Draw":
+                drawCard((Player) entity, Integer.parseInt(args[2]));
+                break;
+            case "Summon":
+                for (int i = 0; i < Integer.parseInt(args[2]); i++) {
+                    summon((Player) entity, new Minion(args[3], Integer.parseInt(args[5]), "Summoned", 0, Integer.parseInt(args[8])));
+                    break;
+                }
         }
     }
 }

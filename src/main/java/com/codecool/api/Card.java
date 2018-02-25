@@ -1,4 +1,7 @@
 package com.codecool.api;
+
+import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
+
 import java.util.Objects;
 
 public abstract class Card extends Entity implements Comparable<Card> {
@@ -21,6 +24,25 @@ public abstract class Card extends Entity implements Comparable<Card> {
 
     public int getManaCost() {
         return manaCost;
+    }
+
+    //Abilities
+    public void drawCard(Player player, int amount) {
+        for (int i = 0; i < amount; i++) {
+            player.cardDraw();
+        }
+    }
+
+    public void heal(Entity target, int amount) {
+        target.heal(amount);
+    }
+
+    public void doDamage(Entity target, int amount) {
+        target.takeDamage(amount);
+    }
+
+    void summon(Player target, Minion minion) throws NoMoreRoomOnDeskException {
+        target.placeWithoutMana(minion);
     }
 
 

@@ -4,38 +4,21 @@ import com.codecool.api.exceptions.EntityIsDeadException;
 import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
 import com.codecool.api.exceptions.WrongTargetException;
 
-public class MagicCard extends Card implements Magic {
+public class MagicCard extends Card {
 
     public MagicCard(String name, int health, String description, int manaCost) {
         super(name, health, description, manaCost);
     }
 
-    public void drawCard(Player player, int amount) {
-        for (int i = 0; i < amount; i++) {
-            player.cardDraw();
-        }
-    }
-
-    public void heal(Entity target, int amount) throws EntityIsDeadException {
-        target.heal(amount);
-    }
-
-    public void setHealth(Minion target, int amount) {
-        target.setHealth(amount);
-    }
-
-    public void doDamage(Entity target, int amount) {
-        target.takeDamage(amount);
-    }
-
+    //Magic
     public void setHealthAndDamage(Minion target, int amount) {
         target.increaseHealthCap(amount);
         target.setHealth(target.getHealth() + amount);
         target.setAttack(target.getAttack() + amount);
     }
 
-    public void summon(Player target, Minion minion) throws NoMoreRoomOnDeskException {
-            target.placeWithoutMana(minion);
+    public void setHealth(Minion target, int amount) {
+        target.setHealth(amount);
     }
 
     public void doMagic(Entity entity) throws EntityIsDeadException, WrongTargetException, NoMoreRoomOnDeskException {

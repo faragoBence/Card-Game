@@ -94,6 +94,9 @@ public class Player extends Entity {
             hand.remove(card);
             desk.add(card);
             currentMana -= card.getManaCost();
+            if (card.getDescription().split(" ")[0].equals("Battlecry:")) {
+                ((Minion) card).useAbility(this);
+            }
         } else {
             throw new NoMoreRoomOnDeskException();
         }
@@ -116,6 +119,19 @@ public class Player extends Entity {
         }
         return true;
     }
+
+    public void clearField() throws NoMoreRoomOnDeskException {
+        List<Card> desk = getDesk();
+        for (int i = 0; i < desk.size(); i++) {
+            if (!desk.get(i).isAlive()) {
+                if (desk.get(i).getDescription().split(" ")[0].equals("Deathrattle:")) {
+                    ((Minion) desk.get(i)).useAbility(this);
+                }
+                desk.remove(desk.get(i));
+            }
+        }
+    }
+
 
     @Override
     public String toString() {

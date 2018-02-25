@@ -52,8 +52,12 @@ class CmdProg {
                 String line = scanner.nextLine();
                 clearscreen();
                 roundOver = commandReader(line.split(" "));
-                board.clearField(currentPlayer);
-                board.clearField(enemy);
+                try {
+                    currentPlayer.clearField();
+                    currentPlayer.clearField();
+                } catch (NoMoreRoomOnDeskException ex) {
+                    System.out.println("The desk is full!");
+                }
             }
             temp = currentPlayer;
             currentPlayer = enemy;

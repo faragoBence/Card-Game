@@ -40,8 +40,7 @@ public abstract class Entity {
         isAlive = health > 0;
     }
 
-    public void heal(int amount) throws EntityIsDeadException {
-        checkIfAlive();
+    public void heal(int amount) {
         health += amount;
         if (health > healthCap) {
             health = healthCap;

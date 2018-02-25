@@ -43,15 +43,6 @@ public class Board {
     }
 
 
-    public void clearField(Player player) {
-        List<Card> desk = player.getDesk();
-        for (int i = 0; i < desk.size(); i++) {
-            if (!desk.get(i).isAlive()) {
-                desk.remove(desk.get(i));
-            }
-        }
-    }
-
     public void changeAttackState(Player player) {
         List<Card> desk = player.getDesk();
         for (Card aDesk : desk) {

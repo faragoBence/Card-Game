@@ -11,5 +11,5 @@ interface Magic {
     void doDamage(Entity target, int amount);
     void setHealthAndDamage(Minion target,int amount);
 
-    void summon(Player target, int amount, Minion minion) throws NoMoreRoomOnDeskException;
+    void summon(Player target, Minion minion) throws NoMoreRoomOnDeskException;
 }

@@ -81,7 +81,7 @@ class CmdProg {
                 handleMagic(args);
                 return true;
             case ":end":
-                board.changeAttackState(currentPlayer);
+                board.changeAttackState(enemy);
                 return false;
             default:
                 System.out.println("Wrong input entered!");

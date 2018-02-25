@@ -34,11 +34,8 @@ public class MagicCard extends Card implements Magic {
         target.setAttack(target.getAttack() + amount);
     }
 
-    @Override
-    public void summon(Player target, int amount, Minion minion) throws NoMoreRoomOnDeskException {
-        for (int i = 0; i < amount; i++) {
+    public void summon(Player target, Minion minion) throws NoMoreRoomOnDeskException {
             target.placeWithoutMana(minion);
-        }
     }
 
     public void doMagic(Entity entity) throws EntityIsDeadException, WrongTargetException, NoMoreRoomOnDeskException {
@@ -76,7 +73,9 @@ public class MagicCard extends Card implements Magic {
                 if (!(entity instanceof Player)) {
                     throw new WrongTargetException();
                 }
-                summon(((Player) entity), amount, new Minion(args[2], Integer.parseInt(args[4]), "Summoned", 0, Integer.parseInt(args[7])));
+                for (int i = 0; i < amount; i++) {
+                    summon(((Player) entity), new Minion(args[2], Integer.parseInt(args[4]), "Summoned", 0, Integer.parseInt(args[7])));
+                }
         }
         takeDamage(1);
     }

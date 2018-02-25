@@ -16,7 +16,6 @@
 
 
 ##Making new decks
-###Making pictures for the "Clalling the Ocean" and the "Recruiting" cards.
+###Making pictures for the cards.
 ###Making pictures for the "Sidious" deck.
-###? Making the deck sizes to 20
 ###? Making the desk and hand size to 7

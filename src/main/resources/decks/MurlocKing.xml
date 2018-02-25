@@ -12,6 +12,11 @@
         <Minion name="Barnes" description="xy" manacost="4" attack="3" health="4"/>
         <Minion name="Ysera" description="dragon" manacost="9" attack="4" health="10"/>
         <Minion name="LightFused Stegodon" description="beast" manacost="4" attack="3" health="4"/>
+        <Minion name="Blowgill Sniper" description="murloc" manacost="2" attack="2" health="1"/>
+        <Minion name="Puddlestomper" description="murloc" manacost="2" attack="3" health="2"/>
+        <Minion name="Seadevil Stinger" description="murloc" manacost="6" attack="5" health="5"/>
+        <Minion name="Coldlight Oracle" description="murloc" manacost="8" attack="7" health="6"/>
+
     </Minions>
     <MagicCards>
         <MagicCard name="Recruiting" description="Summon 2 Recruit with 1 health and 1 attack" manacost="3"/>

@@ -22,6 +22,7 @@
         <Minion name="Despicable Dreadlord" description="void" manacost="5" attack="4" health="5"/>
         <Minion name="Leeroy Jenkins" description="xy" manacost="5" attack="6" health="2"/>
         <Minion name="Doom Guard" description="void" manacost="5" attack="5" health="7"/>
+
         <Minion name="Darth Maul" description="Sith" manacost="3" attack="4" health="3"/>
         <Minion name="Captain Grivious" description="Sith" manacost="4" attack="5" health="2"/>
         <Minion name="Doku" description="Sith" manacost="2" attack="3" health="2"/>
@@ -32,9 +33,15 @@
         <Minion name="X-wing" description="machine" manacost="4" attack="4" health="4"/>
         <Minion name="Death Star" description="machine" manacost="6" attack="8" health="2"/>
         <Minion name="Kylo Ren" description="Sith" manacost="5" attack="6" health="4"/>
+        <Minion name="AT-AT" description="machine" manacost="7" attack="3" health="10"/>
+        <Minion name="B1 battle droid" description="droid" manacost="1" attack="2" health="1"/>
+        <Minion name="Blowgill Sniper" description="murloc" manacost="2" attack="2" health="1"/>
+        <Minion name="Puddlestomper" description="murloc" manacost="2" attack="3" health="2"/>
+        <Minion name="Seadevil Stinger" description="murloc" manacost="6" attack="5" health="5"/>
+        <Minion name="Coldlight Oracle" description="murloc" manacost="8" attack="7" health="6"/>
+        <Minion name="Captured Jormungar" description="beast" manacost="7" attack="5" health="9"/>
     </Minions>
     <MagicCards>
-        <MagicCard name="Recruiting" description="Summon 2 Recruit with 1 health and 1 attack" manacost="3"/>
         <MagicCard name="Equality" description="Make 1 a minion's health" manacost="1"/>
         <MagicCard name="Fireball" description="Do 6 damage to a minion" manacost="4"/>
         <MagicCard name="Life stream" description="Restore 4 amount of health to the target" manacost="2"/>
@@ -44,6 +51,8 @@
         <MagicCard name="Holy Light" description="Restore 10 amount of health to the target" manacost="8"/>
         <MagicCard name="Holy Smite" description="Do 2 damage to a minion" manacost="1"/>
         <MagicCard name="Growing" description="Set 4 to a minion's health" manacost="3"/>
+
+        <MagicCard name="Recruiting" description="Summon 2 Recruit with 1 health and 1 attack" manacost="3"/>
         <MagicCard name="Calling the Ocean" description="Summon 1 Kraken with 2 health and 2 attack" manacost="3"/>
         <MagicCard name="Charging the DeathStar" description="Draw 2 cards" manacost="3"/>
         <MagicCard name="Drain Life" description="Restore 6 amount of health to the target" manacost="5"/>
@@ -53,5 +62,8 @@
         <MagicCard name="Clone training" description="Summon 2 Clone with 1 health and 2 attack" manacost="3"/>
         <MagicCard name="Sith training" description="Summon 1 Sith with 4 health and 4 attack" manacost="4"/>
         <MagicCard name="Revive" description="Restore 12 amount of health to the target" manacost="10"/>
+        <MagicCard name="Meteor" description="Do 10 damage to a minion" manacost="8"/>
+        <MagicCard name="Summon imp" description="Summon 1 Imp with 5 health and 3 attack" manacost="4"/>
+        <MagicCard name="Gathering" description="Summon 3 Soul with 1 health and 2 attack" manacost="5"/>
     </MagicCards>
 </Cards>

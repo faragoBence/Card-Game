@@ -2,15 +2,17 @@
 <Cards>
     <Minions>
         <Minion name="Darth Maul" description="Sith" manacost="3" attack="4" health="3"/>
-        <Minion name="Captain Grivious" description="Sith" manacost="4" attack="5" health="2"/>
-        <Minion name="Doku" description="Sith" manacost="2" attack="3" health="2"/>
+        <Minion name="Grievous" description="Sith" manacost="4" attack="5" health="2"/>
+        <Minion name="Dooku" description="Sith" manacost="2" attack="3" health="2"/>
         <Minion name="Vader" description="Sith" manacost="8" attack="7" health="6"/>
         <Minion name="Boba Fett" description="Bounty hunter" manacost="2" attack="2" health="2"/>
-        <Minion name="Django Fett" description="Bounty hunter" manacost="3" attack="3" health="3"/>
+        <Minion name="Jango Fett" description="Bounty hunter" manacost="3" attack="3" health="3"/>
         <Minion name="Droideka" description="droid" manacost="4" attack="5" health="3"/>
         <Minion name="X-wing" description="machine" manacost="4" attack="4" health="4"/>
         <Minion name="Death Star" description="machine" manacost="6" attack="8" health="2"/>
         <Minion name="Kylo Ren" description="Sith" manacost="5" attack="6" health="4"/>
+        <Minion name="AT-AT" description="machine" manacost="7" attack="3" health="10"/>
+        <Minion name="B1 battle droid" description="droid" manacost="1" attack="2" health="1"/>
     </Minions>
     <MagicCards>
         <MagicCard name="Charging the DeathStar" description="Draw 2 cards" manacost="3"/>

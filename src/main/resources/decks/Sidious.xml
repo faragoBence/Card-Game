@@ -9,9 +9,9 @@
         <Minion name="Jango Fett" description="Bounty hunter" manacost="3" attack="3" health="3"/>
         <Minion name="Droideka" description="droid" manacost="4" attack="5" health="3"/>
         <Minion name="X-wing" description="machine" manacost="4" attack="4" health="4"/>
-        <Minion name="Death Star" description="machine" manacost="6" attack="8" health="2"/>
+        <Minion name="Death Star" description="Battlecry: Taunt" manacost="6" attack="8" health="2"/>
         <Minion name="Kylo Ren" description="Sith" manacost="5" attack="6" health="4"/>
-        <Minion name="AT-AT" description="machine" manacost="7" attack="3" health="10"/>
+        <Minion name="AT-AT" description="Battlecry: Taunt" manacost="7" attack="3" health="10"/>
         <Minion name="B1 battle droid" description="droid" manacost="1" attack="2" health="1"/>
     </Minions>
     <MagicCards>

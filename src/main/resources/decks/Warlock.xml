@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Cards>
     <Minions>
-        <Minion name="Rightous Protector" description="xy" manacost="1" attack="2" health="2"/>
+        <Minion name="Rightous Protector" description="Battlecry: Taunt" manacost="1" attack="2" health="2"/>
         <Minion name="SunKeeper Tarim" description="beast" manacost="6" attack="3" health="7"/>
         <Minion name="Spellbreaker" description="xy" manacost="4" attack="4" health="3"/>
-        <Minion name="Gentle Megasaur" description="beast" manacost="4" attack="5" health="4"/>
+        <Minion name="Gentle Megasaur" description="Battlecry: Taunt" manacost="4" attack="5" health="4"/>
         <Minion name="Knife Juggler" description="dwarf" manacost="2" attack="2" health="2"/>
         <Minion name="Dire Wolf" description="beast" manacost="2" attack="2" health="2"/>
         <Minion name="Y'shaarj" description="dragon" manacost="10" attack="7" health="8"/>
-        <Minion name="Despicable Dreadlord" description="void" manacost="5" attack="4" health="5"/>
+        <Minion name="Despicable Dreadlord" description="Battlecry: Taunt" manacost="5" attack="4" health="5"/>
         <Minion name="Leeroy Jenkins" description="xy" manacost="5" attack="6" health="2"/>
         <Minion name="Doom Guard" description="void" manacost="5" attack="5" health="7"/>
         <Minion name="Captured Jormungar" description="beast" manacost="7" attack="5" health="9"/>

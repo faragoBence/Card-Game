@@ -107,6 +107,16 @@ public class Player extends Entity {
         }
     }
 
+    public boolean attackable() {
+        for (int i = 0; i < desk.size(); i++) {
+            if (((Minion) desk.get(i)).getAbility().equals("Taunt")) {
+                return false;
+            }
+
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
         return "name= " + getName() +

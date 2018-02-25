@@ -9,10 +9,13 @@ public class Minion extends Card {
 
     private boolean canAttack;
 
+    private String ability = "Nothing";
+
     public Minion(String name, int health, String description, int manaCost, int attack) {
         super(name, health, description, manaCost);
         this.attack = attack;
         this.canAttack = false;
+        createAbility();
     }
 
     public int getAttack() {
@@ -33,6 +36,11 @@ public class Minion extends Card {
     }
 
 
+    public String getAbility() {
+        return ability;
+    }
+
+
     // Method(s)
     public void attack(Minion targetCard) throws SelfTargetException, CanNotAttackException {
         if (this == targetCard) {
@@ -50,8 +58,12 @@ public class Minion extends Card {
 
     public void attack(Player player) throws CanNotAttackException {
         if (canAttack) {
-            player.takeDamage(attack);
-            setCanAttack(false);
+            if (player.attackable()) {
+                player.takeDamage(attack);
+                setCanAttack(false);
+            } else {
+                throw new CanNotAttackException();
+            }
         } else {
             throw new CanNotAttackException();
         }
@@ -63,6 +75,14 @@ public class Minion extends Card {
                 ", manaCost= " + getManaCost() +
                 ", attack= " + getAttack() +
                 ", health= " + getHealth() +
+                ", ability= " + getDescription() +
                 ", can attack= " + canAttack();
+    }
+
+    public void createAbility() {
+        String[] desc = getDescription().split(" ");
+        if (desc[0].equals("Battlecry:")) {
+            ability = desc[1];
+        }
     }
 }

@@ -3,18 +3,18 @@
     <Minions>
         <Minion name="GrimScale Chum" description="Murloc" manacost="1" attack="2" health="1"/>
         <Minion name="Murloc Tidecaller" description="Murloc" manacost="1" attack="1" health="2"/>
-        <Minion name="Vilefin Inquisitor" description="Murloc" manacost="1" attack="1" health="3"/>
+        <Minion name="Vilefin Inquisitor" description="Battlecry: Taunt" manacost="1" attack="1" health="3"/>
         <Minion name="Hidroglyst" description="Murloc" manacost="2" attack="2" health="2"/>
         <Minion name="Rockpool Hunter" description="Murloc" manacost="2" attack="2" health="3"/>
         <Minion name="Coldlight Seer" description="Murloc" manacost="3" attack="2" health="3"/>
         <Minion name="Murloc Warleader" description="Murloc" manacost="3" attack="3" health="3"/>
         <Minion name="Argent Squire" description="warrior" manacost="1" attack="1" health="1"/>
-        <Minion name="Barnes" description="xy" manacost="4" attack="3" health="4"/>
+        <Minion name="Barnes" description="Battlecry: Taunt" manacost="4" attack="3" health="4"/>
         <Minion name="Ysera" description="dragon" manacost="9" attack="4" health="10"/>
         <Minion name="LightFused Stegodon" description="beast" manacost="4" attack="3" health="4"/>
         <Minion name="Blowgill Sniper" description="murloc" manacost="2" attack="2" health="1"/>
         <Minion name="Puddlestomper" description="murloc" manacost="2" attack="3" health="2"/>
-        <Minion name="Seadevil Stinger" description="murloc" manacost="6" attack="5" health="5"/>
+        <Minion name="Seadevil Stinger" description="Battlecry: Taunt" manacost="6" attack="5" health="5"/>
         <Minion name="Coldlight Oracle" description="murloc" manacost="8" attack="7" health="6"/>
 
     </Minions>

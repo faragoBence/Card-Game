@@ -11,19 +11,20 @@ import java.util.Objects;
 public class Player extends Entity {
 
     private int currentMana = 0;
+
     private int maxMana = 0;
     private final List<Card> hand = new ArrayList<>();
     private final List<Card> desk = new ArrayList<>();
-    int MANACAP = 10;
+
+    private int manacap = 10;
     private List<Card> deck = new ArrayList<>();
     private Hero hero;
 
-    // Constructor(s)
     public Player(String name, int health) {
         super(name, health);
     }
 
-    // Getter(s)
+    // Getters and Setters
     public int getMana() {
         return currentMana;
     }
@@ -48,11 +49,23 @@ public class Player extends Entity {
         this.hero = hero;
     }
 
+    public void setCurrentMana(int amount) {
+        currentMana += amount;
+    }
+
+    public void setMaxMana(int amount) {
+        maxMana += amount;
+    }
+
+    public void setManacap(int amount) {
+        manacap += 1;
+    }
+
 
     // Method(s)
     public void manageMana() throws EntityIsDeadException {
         checkIfAlive();
-        if (maxMana < MANACAP) {
+        if (maxMana < manacap) {
             maxMana++;
         }
         currentMana = maxMana;
@@ -92,10 +105,13 @@ public class Player extends Entity {
 
         if (desk.size() < 5) {
             hand.remove(card);
-            desk.add(card);
             currentMana -= card.getManaCost();
-            if (card.getDescription().split(" ")[0].equals("Battlecry:")) {
-                ((Minion) card).useAbility(this);
+            if (card instanceof Minion) {
+                desk.add(card);
+
+                if (card.getDescription().split(" ")[0].equals("Battlecry:")) {
+                    ((Minion) card).useAbility(this);
+                }
             }
         } else {
             throw new NoMoreRoomOnDeskException();

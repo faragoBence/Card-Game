@@ -9,15 +9,13 @@ public abstract class Card extends Entity implements Comparable<Card> {
     private final String description;
     private final int manaCost;
 
-
-    // Constructor(s)
     Card(String name, int health, String description, int manaCost) {
         super(name, health);
         this.description = description;
         this.manaCost = manaCost;
     }
 
-    // Getter(s)
+    // Getters
     public String getDescription() {
         return description;
     }
@@ -41,11 +39,23 @@ public abstract class Card extends Entity implements Comparable<Card> {
         target.takeDamage(amount);
     }
 
-    void summon(Player target, Minion minion) throws NoMoreRoomOnDeskException {
+    public void summon(Player target, Minion minion) throws NoMoreRoomOnDeskException {
         target.placeWithoutMana(minion);
     }
 
+    public void increaseMana(Player target) {
+        target.setManacap(1);
+        target.setMaxMana(1);
+    }
 
+    public void healAll(Player target, int amount) {
+        for (Card card : target.getDesk()) {
+            card.heal(amount);
+        }
+    }
+
+
+    //Methods
     @Override
     public String toString() {
         return "name= " + getName() +

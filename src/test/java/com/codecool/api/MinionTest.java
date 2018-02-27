@@ -2,6 +2,7 @@ package com.codecool.api;
 
 import com.codecool.api.exceptions.CanNotAttackException;
 import com.codecool.api.exceptions.SelfTargetException;
+import com.codecool.api.exceptions.TargetisStealthException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,7 @@ class MinionTest {
     }
 
     @Test
-    void testAttack() throws SelfTargetException, CanNotAttackException {
+    void testAttack() throws SelfTargetException, CanNotAttackException, TargetisStealthException {
         assertThrows(SelfTargetException.class, () -> card1.attack(card1));
         assertFalse(card1.canAttack());
         assertThrows(CanNotAttackException.class, () -> card1.attack(card2));

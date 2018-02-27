@@ -3,6 +3,7 @@ package com.codecool.api;
 import com.codecool.api.exceptions.CanNotAttackException;
 import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
 import com.codecool.api.exceptions.SelfTargetException;
+import com.codecool.api.exceptions.TargetisStealthException;
 
 public class Minion extends Card {
 
@@ -18,6 +19,7 @@ public class Minion extends Card {
         this.canAttack = false;
         createAbility();
     }
+    //Getters and Setters
 
     public int getAttack() {
         return attack;
@@ -43,15 +45,22 @@ public class Minion extends Card {
 
 
     // Method(s)
-    public void attack(Minion targetCard) throws SelfTargetException, CanNotAttackException {
+    public void attack(Minion targetCard) throws SelfTargetException, CanNotAttackException, TargetisStealthException {
         if (this == targetCard) {
             throw new SelfTargetException();
         }
         if (canAttack) {
+            if (getAbility().equals("Stealth")) {
+                ability = "Nothing";
+            }
             int penaltyDamage = targetCard.getAttack();
-            targetCard.takeDamage(attack);
-            takeDamage(penaltyDamage);
-            setCanAttack(false);
+            if (targetCard.getAbility() != "Stealth") {
+                targetCard.takeDamage(attack);
+                takeDamage(penaltyDamage);
+                setCanAttack(false);
+            } else {
+                throw new TargetisStealthException();
+            }
         } else {
             throw new CanNotAttackException();
         }
@@ -70,6 +79,41 @@ public class Minion extends Card {
         }
     }
 
+    public void createAbility() {
+        String[] desc = getDescription().split(" ");
+        if (desc[0].equals("Battlecry:") || desc[0].equals("Deathrattle:")) {
+            ability = desc[1];
+        }
+    }
+
+    public void useAbility(Player player) throws NoMoreRoomOnDeskException {
+        String[] args = getDescription().split(" ");
+        switch (ability) {
+            case "Restore":
+                heal(player, Integer.parseInt(args[5]));
+                break;
+            case "Draw":
+                drawCard(player, Integer.parseInt(args[2]));
+                break;
+            case "Summon":
+                for (int i = 0; i < Integer.parseInt(args[2]); i++) {
+                    summon(player, new Minion(args[3], Integer.parseInt(args[5]), "Summoned", 0, Integer.parseInt(args[8])));
+                }
+                break;
+            case "Increase":
+                increaseMana(player);
+                break;
+            case "Charge":
+                setCanAttack(true);
+                break;
+            case "Heal":
+                healAll(player, Integer.parseInt(args[3]));
+                break;
+
+        }
+    }
+
+
     @Override
     public String toString() {
         return "name= " + getName() +
@@ -78,29 +122,5 @@ public class Minion extends Card {
                 ", health= " + getHealth() +
                 ", ability= " + getDescription() +
                 ", can attack= " + canAttack();
-    }
-
-    public void createAbility() {
-        String[] desc = getDescription().split(" ");
-        if (desc[0].equals("Battlecry:") || desc[0].equals("Deathrattle:")) {
-            ability = desc[1];
-        }
-    }
-
-    public void useAbility(Entity entity) throws NoMoreRoomOnDeskException {
-        String[] args = getDescription().split(" ");
-        switch (ability) {
-            case "Heal":
-                heal(entity, Integer.parseInt(args[5]));
-                break;
-            case "Draw":
-                drawCard((Player) entity, Integer.parseInt(args[2]));
-                break;
-            case "Summon":
-                for (int i = 0; i < Integer.parseInt(args[2]); i++) {
-                    summon((Player) entity, new Minion(args[3], Integer.parseInt(args[5]), "Summoned", 0, Integer.parseInt(args[8])));
-                    break;
-                }
-        }
     }
 }

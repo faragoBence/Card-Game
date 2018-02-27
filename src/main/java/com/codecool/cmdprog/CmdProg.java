@@ -138,8 +138,6 @@ class CmdProg {
             }
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException ex) {
             System.out.println("Wrong input entered!");
-        } catch (EntityIsDeadException ex) {
-            currentPlayer.getHand().remove(magicCard);
         } catch (WrongTargetException ex) {
             System.out.println("You targeted wrong entity!");
         } catch (NoMoreRoomOnDeskException ex) {
@@ -195,6 +193,8 @@ class CmdProg {
             System.out.println("Wrong input entered!");
         } catch (SelfTargetException ex) {
             System.out.println("Cannot attack yourself!");
+        } catch (TargetisStealthException ex) {
+            System.out.println("The target is Stealth!");
         }
     }
 

@@ -15,6 +15,7 @@ public abstract class Entity {
         this.healthCap = health;
     }
 
+    //Getters and Setters
     public String getName() {
         return name;
     }
@@ -35,6 +36,7 @@ public abstract class Entity {
         this.health = health;
     }
 
+    //Methods
     public void takeDamage(int amount) {
         health -= amount;
         isAlive = health > 0;

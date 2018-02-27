@@ -20,9 +20,13 @@ public class Board {
         createHeroList();
     }
 
+    //Getter
     public List<Hero> getHeroes() {
         return heroes;
     }
+
+
+    //Methods
 
     private void makeHand(Player player) {
         for (int i = 0; i < 2; i++) {

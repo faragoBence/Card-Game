@@ -10,7 +10,6 @@ public class Hero {
     private final String name;
     private final String imagePath;
     private final Random random = new Random();
-
     private final List<Card> deck;
 
     public Hero(String name, String imagePath) {
@@ -19,6 +18,16 @@ public class Hero {
         deck = new ArrayList<>();
     }
 
+    //Getters
+    public String getName() {
+        return name;
+    }
+
+    public List<Card> getDeck() {
+        return deck;
+    }
+
+    //Method
     public void importAndShuffle() {
         List<Card> unshuffled = new CardParser("src/main/resources/decks/" + getName() + ".xml").getCards();
         while (unshuffled.size() != 0) {
@@ -27,13 +36,5 @@ public class Hero {
             deck.add(card);
             unshuffled.remove(card);
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public List<Card> getDeck() {
-        return deck;
     }
 }

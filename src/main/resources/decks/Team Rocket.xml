@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cards>
+    <Minions>
+        <Minion name="Meowth" description="Deathrattle: Draw 3 card" manacost="4" attack="3" health="3"/>
+        <Minion name="Ekans" description="Battlecry: Stealth" manacost="5" attack="4" health="4"/>
+        <Minion name="Koffing" description="Battlecry: Stealth" manacost="8" attack="6" health="6"/>
+        <Minion name="Jessie" description="Deathrattle: Summon 1 Ekans with 4 health and 4 attack" manacost="7"
+                attack="4" health="2"/>
+        <Minion name="James" description="Deathrattle: Summon 1 Victreebel with 1 health and 2 attack" manacost="4"
+                attack="2" health="4"/>
+        <Minion name="Victreebel" description="Battlecry: Charge" manacost="1" attack="2" health="1"/>
+        <Minion name="Gastly" description="Nothing" manacost="2" attack="2" health="2"/>
+        <Minion name="Charmander" description="Nothing" manacost="3" attack="3" health="3"/>
+        <Minion name="Squirtle" description="Nothing" manacost="4" attack="3" health="4"/>
+        <Minion name="Onix" description="Battlecry: Taunt" manacost="7" attack="4" health="8"/>
+        <Minion name="Machop" description="Battlecry: Taunt" manacost="4" attack="2" health="5"/>
+        <Minion name="Diglett" description="Battlecry: Stealth" manacost="1" attack="2" health="1"/>
+        <Minion name="Gengar" description="Nothing" manacost="6" attack="6" health="5"/>
+    </Minions>
+    <MagicCards>
+        <MagicCard name="Train" description="Give 2 health and attack to a minion" manacost="3"/>
+        <MagicCard name="Weaken" description="Make 2 a minion's health" manacost="2"/>
+        <MagicCard name="Capture" description="Decrease enemy mana by 1" manacost="3"/>
+        <MagicCard name="Evolve" description="Give 3 health and attack to a minion" manacost="5"/>
+        <MagicCard name="Koffing's smog" description="Deal 2 damage to all minions on Player desk" manacost="3"/>
+        <MagicCard name="Meal time" description="Restore 4 amount of health to the target" manacost="2"/>
+        <MagicCard name="Monolog" description="Do 10 damage to a minion" manacost="6"/>
+    </MagicCards>
+</Cards>

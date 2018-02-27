@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Heroes>
-    <Hero name="MurlocKing" image="not created yet"/>
+    <Hero name="Murloc King" image="not created yet"/>
     <Hero name="Sidious" image="not created yet"/>
-    <Hero name="Varga" image="not created yet"/>
     <Hero name="Warlock" image="not created yet"/>
+    <Hero name="Sauron" image="not created yet"/>
+    <Hero name="Team Rocket" image="not created yet"/>
 </Heroes>

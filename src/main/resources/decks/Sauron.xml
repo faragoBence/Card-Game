@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cards>
+    <Minions>
+        <Minion name="Gollum" description="Battlecry: Charge" manacost="1" attack="1" health="2"/>
+        <Minion name="Uruk-hai" description="Nothing" manacost="2" attack="2" health="2"/>
+        <Minion name="Troll" description="Battlecry: Taunt" manacost="4" attack="2" health="5"/>
+        <Minion name="Goblin" description="Nothing" manacost="1" attack="2" health="1"/>
+        <Minion name="Orc" description="Battlecry: Charge" manacost="2" attack="3" health="2"/>
+        <Minion name="Goblin King" description="Deathrattle: Summon 2 Goblin with 1 health and 2 attack" manacost="4"
+                attack="2" health="2"/>
+        <Minion name="Shelob" description="Battlecry: Stealth" manacost="5" attack="4" health="4"/>
+        <Minion name="Fellbeast" description="Nothing" manacost="4" attack="4" health="4"/>
+        <Minion name="Nazgul" description="Deathrattle: Draw 1 card" manacost="5" attack="5" health="4"/>
+        <Minion name="Balrog" description="Battlecry: Taunt" manacost="8" attack="8" health="6"/>
+        <Minion name="Ghost" description="Battlecry: Stealth" manacost="4" attack="3" health="3"/>
+        <Minion name="Saruman" description="Battlecry: Increase max mana by 1" manacost="7" attack="7" health="5"/>
+        <Minion name="Lurtz" description="Nothing" manacost="5" attack="3" health="5"/>
+    </Minions>
+    <MagicCards>
+        <MagicCard name="Revive Sauron" description="Summon 1 Sauron with 10 health and 10 attack" manacost="12"/>
+        <MagicCard name="Eye of Sauron" description="Make 1 a minion's health" manacost="3"/>
+        <MagicCard name="Mana flow" description="Increase max mana by 1" manacost="4"/>
+        <MagicCard name="Burnin' field" description="Deal 2 damage to all minions on Player desk" manacost="4"/>
+        <MagicCard name="Fireball" description="Do 3 damage to a minion" manacost="2"/>
+        <MagicCard name="Bloodrain" description="Heal all minions on player desk by 3 health" manacost="6"/>
+        <MagicCard name="Wrath of Sauron" description="Give 2 health and attack to a minion" manacost="4"/>
+    </MagicCards>
+</Cards>

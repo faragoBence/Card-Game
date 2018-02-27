@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Cards>
+    <Minions>
+        <Minion name="GrimScale Chum" description="Battlecry: Charge" manacost="1" attack="2" health="1"/>
+        <Minion name="Murloc Tidecaller" description="Battlecry: Charge" manacost="1" attack="1" health="2"/>
+        <Minion name="Vilefin Inquisitor" description="Battlecry: Taunt" manacost="1" attack="1" health="3"/>
+        <Minion name="Hidroglyst" description="Nothing" manacost="2" attack="2" health="2"/>
+        <Minion name="Rockpool Hunter" description="Battlecry: Charge" manacost="2" attack="2" health="3"/>
+        <Minion name="Coldlight Seer" description="Nothing" manacost="3" attack="2" health="3"/>
+        <Minion name="Murloc Warleader" description="Deathrattle: Draw 3 cards" manacost="3" attack="3" health="3"/>
+        <Minion name="Argent Squire" description="Nothing" manacost="1" attack="1" health="1"/>
+        <Minion name="Barnes" description="Battlecry: Taunt" manacost="4" attack="3" health="4"/>
+        <Minion name="Ysera" description="Deathrattle: Restore 5 health to the player" manacost="9" attack="4"
+                health="10"/>
+        <Minion name="LightFused Stegodon" description="Nothing" manacost="4" attack="3" health="4"/>
+        <Minion name="Blowgill Sniper" description="Deathrattle: Summon 2 Murloc with 1 health and 2 attack"
+                manacost="3" attack="2" health="1"/>
+        <Minion name="Puddlestomper" description="Deathrattle: Summon 3 Murloc with 1 health and 2 attack" manacost="5"
+                attack="3" health="2"/>
+        <Minion name="Seadevil Stinger" description="Battlecry: Taunt" manacost="6" attack="5" health="5"/>
+        <Minion name="Coldlight Oracle" description="Battlecry: Draw 2 cards" manacost="8" attack="7" health="6"/>
+
+    </Minions>
+    <MagicCards>
+        <MagicCard name="Murloc meal" description="Summon 5 Murloc with 1 health and 1 attack" manacost="5"/>
+        <MagicCard name="Equality" description="Make 1 a minion's health" manacost="1"/>
+        <MagicCard name="Fire Canon" description="Do 6 damage to a minion" manacost="4"/>
+        <MagicCard name="Life stream" description="Restore 4 amount of health to the target" manacost="2"/>
+        <MagicCard name="Level Up!" description="Give 3 health and attack to a minion" manacost="4"/>
+    </MagicCards>
+</Cards>

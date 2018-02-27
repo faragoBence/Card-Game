@@ -90,6 +90,8 @@ public class MagicCard extends Card {
                 }
                 healAll((Player) entity, Integer.parseInt(args[3]));
                 break;
+            default:
+                heal(1);
         }
         takeDamage(1);
     }

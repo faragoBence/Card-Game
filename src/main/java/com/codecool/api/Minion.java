@@ -107,7 +107,7 @@ public class Minion extends Card {
                 setCanAttack(true);
                 break;
             case "Heal":
-                healAll(player, Integer.parseInt(args[3]));
+                healAll(player, Integer.parseInt(args[7]));
                 break;
 
         }
@@ -116,11 +116,16 @@ public class Minion extends Card {
 
     @Override
     public String toString() {
-        return "name= " + getName() +
+        String str = "name= " + getName() +
                 ", manaCost= " + getManaCost() +
                 ", attack= " + getAttack() +
-                ", health= " + getHealth() +
-                ", ability= " + getDescription() +
-                ", can attack= " + canAttack();
+                ", health= " + getHealth();
+        if (!(getAbility().equals("Nothing"))) {
+            str += ", ability= " + getDescription();
+        }
+        if (canAttack()) {
+            str += ", can attack";
+        }
+        return str;
     }
 }

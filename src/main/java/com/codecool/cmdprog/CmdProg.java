@@ -40,8 +40,7 @@ class CmdProg {
                 if (!currentPlayer.isAlive() || !enemy.isAlive()) {
                     break;
                 }
-                System.out.println("\nenemy's name: " + enemy.getName() + " enemy's health: " + enemy.getHealth());
-                System.out.println("\nEnemy's desk:");
+                System.out.println("\n" + enemy);
                 listCards(enemy.getDesk());
                 System.out.println("\nYour desk:\n");
                 listCards(currentPlayer.getDesk());
@@ -54,7 +53,7 @@ class CmdProg {
                 roundOver = commandReader(line.split(" "));
                 try {
                     currentPlayer.clearField();
-                    currentPlayer.clearField();
+                    enemy.clearField();
                 } catch (NoMoreRoomOnDeskException ex) {
                     System.out.println("The desk is full!");
                 }

@@ -41,16 +41,12 @@ public class Player extends Entity {
         return deck;
     }
 
-    private Hero getHero() {
+    public Hero getHero() {
         return hero;
     }
 
     public void setHero(Hero hero) {
         this.hero = hero;
-    }
-
-    public void setCurrentMana(int amount) {
-        currentMana += amount;
     }
 
     public void setMaxMana(int amount) {

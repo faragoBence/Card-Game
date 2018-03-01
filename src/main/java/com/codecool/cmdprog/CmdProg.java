@@ -3,8 +3,8 @@ package com.codecool.cmdprog;
 import com.codecool.api.*;
 import com.codecool.api.Iterators.CardIterator;
 import com.codecool.api.Iterators.HeroIterator;
-import com.codecool.api.Iterators.MagicCardIterator;
 import com.codecool.api.Iterators.MinionIterator;
+import com.codecool.api.datamanager.HeroParser;
 import com.codecool.api.exceptions.*;
 
 import java.util.List;
@@ -17,6 +17,29 @@ class CmdProg {
     private Player enemy;
 
     public void run() {
+        while (true) {
+            clearscreen();
+            printMenu();
+            String choose = scanner.nextLine();
+            switch (choose) {
+                case "1":
+                    clearscreen();
+                    runGame();
+                    break;
+                case "2":
+                    clearscreen();
+                    cardListing();
+                    break;
+                case "3":
+                    System.exit(0);
+                default:
+                    System.out.println("Wrong input entered!");
+            }
+
+        }
+    }
+
+    private void runGame() {
         System.out.println("Please enter your name!");
         currentPlayer = new Player(scanner.nextLine(), 20);
         System.out.println("Please enter the name of the another player");
@@ -101,7 +124,7 @@ class CmdProg {
     }
 
     private void handleMagic(String[] args) {
-        MagicCard magicCard = null;
+        MagicCard magicCard;
         try {
             int cardIndex = Integer.parseInt(args[1]);
             if (currentPlayer.getHand().get(cardIndex - 1) instanceof MagicCard) {
@@ -197,19 +220,98 @@ class CmdProg {
         }
     }
 
+    private void cardListing() {
+        CardLister cardLister = new CardLister();
+        deckChoose(cardLister);
+        clearscreen();
+        while (true) {
+            printListingOptions();
+            String sorting = scanner.nextLine();
+            switch (sorting) {
+                case "1":
+                    cardLister.manaCostAsc();
+                    listCards(cardLister.getCardList());
+                    break;
+                case "2":
+                    cardLister.manaCostDesc();
+                    listCards(cardLister.getCardList());
+                    break;
+                case "3":
+                    cardLister.NameAsc();
+                    listCards(cardLister.getCardList());
+                    break;
+                case "4":
+                    cardLister.NameDesc();
+                    listCards(cardLister.getCardList());
+                    break;
+                case "5":
+                    cardLister.attackAsc();
+                    listMinionCards(cardLister.getMinionCardList());
+                    break;
+                case "6":
+                    cardLister.attackDesc();
+                    listMinionCards(cardLister.getMinionCardList());
+                    break;
+                case "7":
+                    cardLister.healthAsc();
+                    listMinionCards(cardLister.getMinionCardList());
+                    break;
+                case "8":
+                    cardLister.healthDesc();
+                    listMinionCards(cardLister.getMinionCardList());
+                    break;
+                case "0":
+                    cardListing();
+                    break;
+                default:
+                    System.out.println("Wrong input entered!");
+
+
+            }
+        }
+    }
+
+    private void deckChoose(CardLister cardLister) {
+        while (true) {
+            clearscreen();
+            System.out.println("Please select a Hero deck from the list or enter 'all'");
+            HeroParser heroParser = new HeroParser();
+            listHeroes(heroParser.getHeroes());
+            String choose = scanner.nextLine();
+            try {
+                if (!choose.equals("all")) {
+                    cardLister.setCardParser(heroParser.getHeroes().get(Integer.parseInt(choose) - 1));
+                    cardLister.importCards();
+                    break;
+                } else {
+                    for (int i = 0; i < heroParser.getHeroes().size(); i++) {
+                        cardLister.setCardParser(heroParser.getHeroes().get(i));
+                        cardLister.importCards();
+                    }
+                    break;
+                }
+            } catch (Exception ex) {
+                System.out.println("Wrong input entered!");
+            }
+        }
+    }
+
+    private void printListingOptions() {
+        System.out.println("For all cards:");
+        System.out.println("\t1) Mana cost asc.");
+        System.out.println("\t2) Mana cost desc.");
+        System.out.println("\t3) Name asc.");
+        System.out.println("\t4) Name desc.");
+        System.out.println("\nFor minion cards:");
+        System.out.println("\t5) Attack asc.");
+        System.out.println("\t6) Attack desc.");
+        System.out.println("\t7) Health asc.");
+        System.out.println("\t8) Health desc.");
+        System.out.println("\t0) Go back to deck select");
+    }
 
     private void listCards(List<Card> cards) {
         CardIterator cardIterator = new CardIterator(cards);
-        int num = 1;
-        while (cardIterator.hasNext()) {
-            System.out.println(Integer.toString(num++) + ") " + cardIterator.next());
-        }
-        System.out.println("------------------------------------------------------------------------------------------");
-
-    }
-
-    public void listMagicCards(List<MagicCard> cards) {
-        MagicCardIterator cardIterator = new MagicCardIterator(cards);
         int num = 1;
         while (cardIterator.hasNext()) {
             System.out.println(Integer.toString(num++) + ") " + cardIterator.next());
@@ -228,14 +330,18 @@ class CmdProg {
 
     }
 
-    private void listHeroes() {
-        HeroIterator heroIterator = new HeroIterator(board.getHeroes());
+    private void listHeroes(List<Hero> heroes) {
+        HeroIterator heroIterator = new HeroIterator(heroes);
         int num = 1;
         while (heroIterator.hasNext()) {
             System.out.println(Integer.toString(num++) + ") " + heroIterator.next().getName());
         }
         System.out.println("------------------------------------------------------------------------------------------");
 
+    }
+
+    private void printMenu() {
+        System.out.println("1) Start game\n2) Inspect decks\n3) Exit game");
     }
 
 
@@ -247,7 +353,7 @@ class CmdProg {
 
     private void selectHero(Player player) {
         while (true) {
-            listHeroes();
+            listHeroes(board.getHeroes());
             String heroName = scanner.nextLine();
             try {
                 player.setHero(board.getHeroes().get(Integer.parseInt(heroName) - 1));

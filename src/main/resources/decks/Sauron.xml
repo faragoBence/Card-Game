@@ -19,10 +19,10 @@
     <MagicCards>
         <MagicCard name="Revive Sauron" description="Summon 1 Sauron with 10 health and 10 attack" manacost="12"/>
         <MagicCard name="Eye of Sauron" description="Make 1 a minion's health" manacost="3"/>
-        <MagicCard name="Mana flow" description="Increase max mana by 1" manacost="4"/>
+        <MagicCard name="Mana potion" description="Increase max mana by 1" manacost="4"/>
         <MagicCard name="Burnin' field" description="Deal 2 damage to all minions on Player desk" manacost="4"/>
         <MagicCard name="Fireball" description="Do 3 damage to a minion" manacost="2"/>
-        <MagicCard name="Bloodrain" description="Heal all minions on player desk by 3 health" manacost="6"/>
-        <MagicCard name="Wrath of Sauron" description="Give 2 health and attack to a minion" manacost="4"/>
+        <MagicCard name="Blood rain" description="Heal all minions on player desk by 3 health" manacost="6"/>
+        <MagicCard name="One ring" description="Give 2 health and attack to a minion" manacost="4"/>
     </MagicCards>
 </Cards>

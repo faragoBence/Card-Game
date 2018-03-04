@@ -57,6 +57,7 @@ public class GameWindow implements Initializable {
         initEDesk();
         refreshHand();
         refreshDesk();
+        refreshEDesk();
         refreshHeroes();
     }
 
@@ -76,6 +77,16 @@ public class GameWindow implements Initializable {
             if (currentP.getDesk().get(i) instanceof Minion) {
                 ((Label) desk.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) currentP.getDesk().get(i)).getAttack()));
                 ((Label) desk.get(i).getChildren().get(2)).setText(Integer.toString((currentP.getDesk().get(i)).getHealth()));
+            }
+        }
+    }
+
+    public void refreshEDesk() {
+        for (int i = 0; i < enemyP.getDesk().size(); i++) {
+            ((ImageView) eDesk.get(i).getChildren().get(0)).setImage(new Image(new File(enemyP.getDesk().get(i).getImagePath()).toURI().toString()));
+            if (currentP.getDesk().get(i) instanceof Minion) {
+                ((Label) eDesk.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) enemyP.getDesk().get(i)).getAttack()));
+                ((Label) eDesk.get(i).getChildren().get(2)).setText(Integer.toString((enemyP.getDesk().get(i)).getHealth()));
             }
         }
     }
@@ -139,6 +150,8 @@ public class GameWindow implements Initializable {
         }
         refreshHand();
         refreshDesk();
+        refreshHeroes();
+        refreshEDesk();
     }
 
     @Override

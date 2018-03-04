@@ -30,8 +30,8 @@ public class HeroSelect implements Initializable {
 
     Stage thisStage;
     Board board;
-    Player player1;
-    Player player2;
+    Player currentPlayer;
+    Player enemy;
     List<Hero> myHeroes = new ArrayList<>();
 
     @Override
@@ -40,8 +40,8 @@ public class HeroSelect implements Initializable {
 
     public void start(Player player1, Player player2, Board board) throws IOException {
         this.board = board;
-        this.player1 = player1;
-        this.player2 = player2;
+        currentPlayer = player1;
+        enemy = player2;
         createField();
     }
 
@@ -59,7 +59,7 @@ public class HeroSelect implements Initializable {
         for (int i = 0; i < board.getHeroes().size(); i++) {
             ((ImageView) heroes.get(i).getChildren().get(0)).setImage(new Image(new File(board.getHeroes().get(i).getImagePath()).toURI().toString()));
         }
-        myLab.setText(player1.getName() + ", please select a Hero!");
+        myLab.setText(currentPlayer.getName() + ", please select a Hero!");
     }
 
     public void onClick(Pane pane) {
@@ -67,9 +67,9 @@ public class HeroSelect implements Initializable {
         if (!myHeroes.contains(board.getHeroes().get(index))) {
             myHeroes.add(board.getHeroes().get(index));
             pane.getChildren().get(0).setEffect(makeBlackWhite());
-            myLab.setText(player2.getName() + ", please select a Hero!");
+            myLab.setText(enemy.getName() + ", please select a Hero!");
         } else {
-            myLab.setText(player1.getName() + " already selected this Hero");
+            myLab.setText(currentPlayer.getName() + " already selected this Hero");
         }
         if (myHeroes.size() >= 2) {
             startGame();
@@ -167,9 +167,9 @@ public class HeroSelect implements Initializable {
     }
 
     public void startGame() {
-        player1.setHero(myHeroes.get(0));
-        player2.setHero(myHeroes.get(1));
-
+        currentPlayer.setHero(myHeroes.get(0));
+        enemy.setHero(myHeroes.get(1));
+        board.start();
 
         FXMLLoader Loader = new FXMLLoader();
         Loader.setLocation(getClass().getResource("/GameWindow.fxml"));
@@ -183,6 +183,7 @@ public class HeroSelect implements Initializable {
         stage.setScene(new Scene(p));
         GameWindow gameWindow = Loader.getController();
         gameWindow.setThis(stage);
+        gameWindow.settleUp(currentPlayer, enemy, board);
         stage.show();
         thisStage.close();
     }

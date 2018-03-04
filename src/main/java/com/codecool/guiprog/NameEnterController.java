@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class NameEnterController implements Initializable {
@@ -44,6 +45,9 @@ public class NameEnterController implements Initializable {
         Loader.setLocation(getClass().getResource("/HeroSelect.fxml"));
         Loader.load();
         HeroSelect heroSelect = Loader.getController();
+        List<Player> list = board.randomizeStart();
+        player1 = list.get(0);
+        player2 = list.get(1);
         heroSelect.start(player1, player2, board);
         Parent p = Loader.getRoot();
         Stage stage = new Stage();

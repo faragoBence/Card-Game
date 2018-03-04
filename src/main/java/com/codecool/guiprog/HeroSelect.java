@@ -57,10 +57,13 @@ public class HeroSelect implements Initializable {
         heroes.add(Hero4);
         heroes.add(Hero5);
         for (int i = 0; i < board.getHeroes().size(); i++) {
+            heroes.get(i).setOnMouseEntered(event -> increasePane((Pane) event.getSource()));
+            heroes.get(i).setOnMouseExited(event -> decreasePane((Pane) event.getSource()));
             ((ImageView) heroes.get(i).getChildren().get(0)).setImage(new Image(new File(board.getHeroes().get(i).getImagePath()).toURI().toString()));
         }
         myLab.setText(currentPlayer.getName() + ", please select a Hero!");
     }
+
 
     public void onClick(Pane pane) {
         int index = Integer.parseInt(pane.getChildren().get(0).getId()) - 1;
@@ -76,6 +79,26 @@ public class HeroSelect implements Initializable {
         }
 
 
+    }
+
+    public void clickHero1() {
+        onClick(Hero1);
+    }
+
+    public void clickHero2() {
+        onClick(Hero2);
+    }
+
+    public void clickHero3() {
+        onClick(Hero3);
+    }
+
+    public void clickHero4() {
+        onClick(Hero4);
+    }
+
+    public void clickHero5() {
+        onClick(Hero5);
     }
 
     public void increasePane(Pane pane) {
@@ -99,67 +122,6 @@ public class HeroSelect implements Initializable {
         pane.getChildren().get(1).setLayoutX(pane.getChildren().get(1).getLayoutX() - 10);
         pane.getChildren().get(1).setLayoutY(pane.getChildren().get(1).getLayoutY() - 10);
     }
-
-    public void increaseHero1() {
-        increasePane(Hero1);
-    }
-
-    public void decreaseHero1() {
-        decreasePane(Hero1);
-    }
-
-    public void clickHero1() {
-        onClick(Hero1);
-    }
-
-    public void increaseHero2() {
-        increasePane(Hero2);
-    }
-
-    public void decreaseHero2() {
-        decreasePane(Hero2);
-    }
-
-    public void clickHero2() {
-        onClick(Hero2);
-    }
-
-    public void increaseHero3() {
-        increasePane(Hero3);
-    }
-
-    public void decreaseHero3() {
-        decreasePane(Hero3);
-    }
-
-    public void clickHero3() {
-        onClick(Hero3);
-    }
-
-    public void increaseHero4() {
-        increasePane(Hero4);
-    }
-
-    public void decreaseHero4() {
-        decreasePane(Hero4);
-    }
-
-    public void clickHero4() {
-        onClick(Hero4);
-    }
-
-    public void increaseHero5() {
-        increasePane(Hero5);
-    }
-
-    public void decreaseHero5() {
-        decreasePane(Hero5);
-    }
-
-    public void clickHero5() {
-        onClick(Hero5);
-    }
-
     public ColorAdjust makeBlackWhite() {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setSaturation(-1);

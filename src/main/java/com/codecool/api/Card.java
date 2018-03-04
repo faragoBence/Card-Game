@@ -9,10 +9,13 @@ public abstract class Card extends Entity implements Comparable<Card> {
     private final String description;
     private final int manaCost;
 
+    String imagePath;
+
     Card(String name, int health, String description, int manaCost) {
         super(name, health);
         this.description = description;
         this.manaCost = manaCost;
+        imagePath = "src/main/resources/cardimgs/" + name + ".png";
     }
 
     // Getters
@@ -22,6 +25,10 @@ public abstract class Card extends Entity implements Comparable<Card> {
 
     public int getManaCost() {
         return manaCost;
+    }
+
+    public String getImagePath() {
+        return imagePath;
     }
 
     //Abilities

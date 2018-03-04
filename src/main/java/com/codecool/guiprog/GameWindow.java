@@ -1,7 +1,11 @@
 package com.codecool.guiprog;
 
 import com.codecool.api.Board;
+import com.codecool.api.Minion;
 import com.codecool.api.Player;
+import com.codecool.api.exceptions.EntityIsDeadException;
+import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
+import com.codecool.api.exceptions.NotEnoughManaException;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -13,7 +17,6 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,17 +30,14 @@ public class GameWindow implements Initializable {
     @FXML
     Pane hand1, hand2, hand3, hand4, hand5;
     @FXML
-    Pane desk1, desk2, desk3, desk4, desk5;
-    @FXML
-    Pane hero, enemyHero;
+    Pane desk1, desk2, desk3, desk4, desk5, hero, enemyHero;
     private List<Pane> hand;
-
 
     private List<Pane> desk;
     private List<Pane> eDesk;
     // Game data
-    private Player currentPlayer;
-    private Player enemy;
+    private Player currentP;
+    private Player enemyP;
     private Board board;
     Stage thisStage;
 
@@ -48,24 +48,64 @@ public class GameWindow implements Initializable {
         alert.show();
     }
 
-    public void settleUp(Player current, Player enemy, Board board) {
-        currentPlayer = current;
-        this.enemy = enemy;
+    public void settleUp(Player current, Player enemyP, Board board) {
+        currentP = current;
+        this.enemyP = enemyP;
         this.board = board;
-        System.out.println(currentPlayer.getHero().getImagePath());
-        ((ImageView) hero.getChildren().get(0)).setImage((new Image(new File(currentPlayer.getHero().getImagePath()).toURI().toString())));
-        ((Label) hero.getChildren().get(1)).setText(Integer.toString(currentPlayer.getHealth()));
-        ((ImageView) enemyHero.getChildren().get(0)).setImage((new Image(new File(enemy.getHero().getImagePath()).toURI().toString())));
-        ((Label) enemyHero.getChildren().get(1)).setText(Integer.toString(enemy.getHealth()));
+        initHand();
+        initDesk();
+        initEDesk();
+        refreshHand();
+        refreshDesk();
+        refreshHeroes();
     }
 
-    private void initHand() throws IOException {
+    public void refreshHand() {
+        for (int i = 0; i < currentP.getHand().size(); i++) {
+            ((ImageView) hand.get(i).getChildren().get(0)).setImage(new Image(new File(currentP.getHand().get(i).getImagePath()).toURI().toString()));
+            if (currentP.getHand().get(i) instanceof Minion) {
+                ((Label) hand.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) currentP.getHand().get(i)).getAttack()));
+                ((Label) hand.get(i).getChildren().get(2)).setText(Integer.toString((currentP.getHand().get(i)).getHealth()));
+            }
+        }
+    }
+
+    public void refreshDesk() {
+        for (int i = 0; i < currentP.getDesk().size(); i++) {
+            ((ImageView) desk.get(i).getChildren().get(0)).setImage(new Image(new File(currentP.getDesk().get(i).getImagePath()).toURI().toString()));
+            if (currentP.getDesk().get(i) instanceof Minion) {
+                ((Label) desk.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) currentP.getDesk().get(i)).getAttack()));
+                ((Label) desk.get(i).getChildren().get(2)).setText(Integer.toString((currentP.getDesk().get(i)).getHealth()));
+            }
+        }
+    }
+
+    public void refreshHeroes() {
+        ((ImageView) enemyHero.getChildren().get(0)).setImage((new Image(new File(enemyP.getHero().getImagePath()).toURI().toString())));
+        ((Label) enemyHero.getChildren().get(1)).setText(Integer.toString(enemyP.getHealth()));
+        ((ImageView) hero.getChildren().get(0)).setImage((new Image(new File(currentP.getHero().getImagePath()).toURI().toString())));
+        ((Label) hero.getChildren().get(1)).setText(Integer.toString(currentP.getHealth()));
+    }
+
+
+    private void initHand() {
         hand = new ArrayList<>();
         hand.add(hand1);
         hand.add(hand2);
         hand.add(hand3);
         hand.add(hand4);
         hand.add(hand5);
+        for (Pane pane : hand) {
+            pane.setOnMouseClicked(event -> {
+                try {
+                    currentP.placeCard(Integer.parseInt(((Pane) event.getSource()).getChildren().get(0).getId()) - 1);
+                } catch (NoMoreRoomOnDeskException e) {
+                    alert("No more room in the desk!");
+                } catch (NotEnoughManaException e) {
+                    alert("Not enough mana!");
+                }
+            });
+        }
     }
 
     private void initDesk() {
@@ -87,13 +127,18 @@ public class GameWindow implements Initializable {
     }
 
 
-
     // Game Screen - Method(s)
     public void endTurn() {
-        alert("Turn ended");
-        Player temp = currentPlayer;
-        currentPlayer = enemy;
-        enemy = temp;
+        Player temp = currentP;
+        currentP = enemyP;
+        enemyP = temp;
+        try {
+            currentP.startRound();
+        } catch (EntityIsDeadException ex) {
+            alert("Entity is dead!");
+        }
+        refreshHand();
+        refreshDesk();
     }
 
     @Override

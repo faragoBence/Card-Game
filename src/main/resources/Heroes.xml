@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Heroes>
-    <Hero name="Murloc King" image="not created yet"/>
-    <Hero name="Sidious" image="not created yet"/>
-    <Hero name="Warlock" image="not created yet"/>
-    <Hero name="Sauron" image="not created yet"/>
-    <Hero name="Team Rocket" image="not created yet"/>
+    <Hero name="Murloc King" image="src/main/resources/heroimgs/Murloc King.png"/>
+    <Hero name="Sidious" image="src/main/resources/heroimgs/Sidious.png"/>
+    <Hero name="Warlock" image="src/main/resources/heroimgs/Warlock.png"/>
+    <Hero name="Sauron" image="src/main/resources/heroimgs/Sauron.png"/>
+    <Hero name="Team Rocket" image="src/main/resources/heroimgs/Team Rocket.png"/>
 </Heroes>

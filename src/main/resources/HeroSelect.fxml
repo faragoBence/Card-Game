@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.codecool.guiprog.HeroSelect">
+    <children>
+        <ImageView fitHeight="737.0" fitWidth="1291.0" layoutX="-2.0" layoutY="-6.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@NameEnter.png"/>
+            </image>
+        </ImageView>
+        <Pane fx:id="Hero2" layoutX="513.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero2" onMouseEntered="#increaseHero2"
+              onMouseExited="#decreaseHero2" prefHeight="333.0" prefWidth="255.0">
+            <children>
+                <ImageView fx:id="2" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                    <viewport>
+                        <Rectangle2D/>
+                    </viewport>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <Label layoutX="203.0" layoutY="218.0" prefHeight="41.0" prefWidth="38.0" text="30" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="26.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane fx:id="Hero3" layoutX="907.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero3" onMouseEntered="#increaseHero3"
+              onMouseExited="#decreaseHero3" prefHeight="333.0" prefWidth="255.0">
+            <children>
+                <ImageView fx:id="3" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                    <viewport>
+                        <Rectangle2D/>
+                    </viewport>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <Label layoutX="203.0" layoutY="218.0" prefHeight="41.0" prefWidth="38.0" text="30" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="26.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane fx:id="Hero4" layoutX="304.0" layoutY="373.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero4" onMouseEntered="#increaseHero4"
+              onMouseExited="#decreaseHero4" prefHeight="333.0" prefWidth="255.0">
+            <children>
+                <ImageView fx:id="4" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                    <viewport>
+                        <Rectangle2D/>
+                    </viewport>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <Label layoutX="203.0" layoutY="218.0" prefHeight="41.0" prefWidth="38.0" text="30" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="26.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane fx:id="Hero5" layoutX="720.0" layoutY="373.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero5" onMouseEntered="#increaseHero5"
+              onMouseExited="#decreaseHero5" prefHeight="333.0" prefWidth="255.0">
+            <children>
+                <ImageView fx:id="5" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                    <viewport>
+                        <Rectangle2D/>
+                    </viewport>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <Label layoutX="203.0" layoutY="218.0" prefHeight="41.0" prefWidth="38.0" text="30" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="26.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Pane fx:id="Hero1" layoutX="177.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity"
+              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero1" onMouseEntered="#increaseHero1"
+              onMouseExited="#decreaseHero1" prefHeight="333.0" prefWidth="255.0">
+            <children>
+                <ImageView fx:id="1" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+                    <viewport>
+                        <Rectangle2D/>
+                    </viewport>
+                    <cursor>
+                        <Cursor fx:constant="HAND"/>
+                    </cursor>
+                </ImageView>
+                <Label layoutX="203.0" layoutY="218.0" prefHeight="41.0" prefWidth="38.0" text="30" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="26.0"/>
+                    </font>
+                </Label>
+            </children>
+        </Pane>
+        <Label fx:id="myLab" alignment="CENTER" layoutX="269.0" layoutY="50.0" mouseTransparent="true" prefHeight="88.0"
+               prefWidth="880.0" textAlignment="CENTER">
+            <font>
+                <Font name="Nirmala UI" size="50.0"/>
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#ebe30d"/>
+                        <Stop color="#d7a205" offset="1.0"/>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Label>
+    </children>
+</AnchorPane>

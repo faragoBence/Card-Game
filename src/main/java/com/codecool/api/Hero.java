@@ -27,6 +27,10 @@ public class Hero {
         return deck;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
     //Method
     public void importAndShuffle() {
         List<Card> unshuffled = new CardParser("src/main/resources/decks/" + getName() + ".xml").getCards();

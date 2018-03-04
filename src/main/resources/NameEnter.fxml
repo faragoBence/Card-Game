@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.Glow?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -10,8 +10,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.codecool.guiprog.GameWindow">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity"
+            minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0"
+            xmlns="http://javafx.com/javafx/8.0.121" fx:controller="com.codecool.guiprog.NameEnterController">
     <children>
         <ImageView fitHeight="737.0" fitWidth="1291.0" layoutX="-2.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -37,7 +38,9 @@
                 <Glow level="0.0" />
             </effect>
         </TextField>
-        <ImageView fx:id="nextPic" fitHeight="94.0" fitWidth="162.0" layoutX="569.0" layoutY="616.0" onMouseClicked="#getPlayerNames" onMouseEntered="#increaseNextPic" onMouseExited="#decreaseNextPic" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="nextPic" fitHeight="94.0" fitWidth="162.0" layoutX="569.0" layoutY="616.0"
+                   onMouseClicked="#heroSelect" onMouseEntered="#increaseNextPic" onMouseExited="#decreaseNextPic"
+                   pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@hearthStoneButton.png" />
             </image>
@@ -48,7 +51,9 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </ImageView>
-        <Label fx:id="nextLabel" layoutX="624.0" layoutY="645.0" onMouseClicked="#startGame" onMouseEntered="#increaseNextPic" onMouseExited="#decreaseNextPic" prefHeight="30.0" prefWidth="56.0" text="Next" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+        <Label fx:id="nextLabel" layoutX="624.0" layoutY="645.0" onMouseClicked="#heroSelect"
+               onMouseEntered="#increaseNextPic" onMouseExited="#decreaseNextPic" prefHeight="30.0" prefWidth="56.0"
+               text="Next" textAlignment="CENTER" textFill="WHITE" wrapText="true">
             <font>
                 <Font name="Nirmala UI Bold" size="20.0" />
             </font>

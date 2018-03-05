@@ -31,7 +31,11 @@ public class GameWindow implements Initializable {
     Pane hand1, hand2, hand3, hand4, hand5;
     @FXML
     Pane desk1, desk2, desk3, desk4, desk5, hero, enemyHero;
+    @FXML
+    Label deckSize, eDeckSize;
     private List<Pane> hand;
+    @FXML
+    Label curMaxMana, curCurMana, curManaCap;
 
     private List<Pane> desk;
     private List<Pane> eDesk;
@@ -61,12 +65,17 @@ public class GameWindow implements Initializable {
     public void refreshHand() {
         for (int i = 0; i < hand.size(); i++) {
             if (i < currentP.getHand().size()) {
+                hand.get(i).setMouseTransparent(false);
                 ((ImageView) hand.get(i).getChildren().get(0)).setImage(new Image(new File(currentP.getHand().get(i).getImagePath()).toURI().toString()));
                 if (currentP.getHand().get(i) instanceof Minion) {
                     ((Label) hand.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) currentP.getHand().get(i)).getAttack()));
                     ((Label) hand.get(i).getChildren().get(2)).setText(Integer.toString((currentP.getHand().get(i)).getHealth()));
+                } else {
+                    ((Label) hand.get(i).getChildren().get(1)).setText(null);
+                    ((Label) hand.get(i).getChildren().get(2)).setText(null);
                 }
             } else {
+                hand.get(i).setMouseTransparent(true);
                 ((ImageView) hand.get(i).getChildren().get(0)).setImage(null);
                 ((Label) hand.get(i).getChildren().get(1)).setText(null);
                 ((Label) hand.get(i).getChildren().get(2)).setText(null);
@@ -81,6 +90,9 @@ public class GameWindow implements Initializable {
                 if (currentP.getDesk().get(i) instanceof Minion) {
                     ((Label) desk.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) currentP.getDesk().get(i)).getAttack()));
                     ((Label) desk.get(i).getChildren().get(2)).setText(Integer.toString((currentP.getDesk().get(i)).getHealth()));
+                } else {
+                    ((Label) desk.get(i).getChildren().get(1)).setText(null);
+                    ((Label) desk.get(i).getChildren().get(2)).setText(null);
                 }
             } else {
                 ((ImageView) desk.get(i).getChildren().get(0)).setImage(null);
@@ -97,6 +109,9 @@ public class GameWindow implements Initializable {
                 if (enemyP.getDesk().get(i) instanceof Minion) {
                     ((Label) eDesk.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) enemyP.getDesk().get(i)).getAttack()));
                     ((Label) eDesk.get(i).getChildren().get(2)).setText(Integer.toString((enemyP.getDesk().get(i)).getHealth()));
+                } else {
+                    ((Label) eDesk.get(i).getChildren().get(1)).setText(null);
+                    ((Label) eDesk.get(i).getChildren().get(2)).setText(null);
                 }
             } else {
                 ((ImageView) eDesk.get(i).getChildren().get(0)).setImage(null);
@@ -111,6 +126,12 @@ public class GameWindow implements Initializable {
         ((Label) enemyHero.getChildren().get(1)).setText(Integer.toString(enemyP.getHealth()));
         ((ImageView) hero.getChildren().get(0)).setImage((new Image(new File(currentP.getHero().getImagePath()).toURI().toString())));
         ((Label) hero.getChildren().get(1)).setText(Integer.toString(currentP.getHealth()));
+        deckSize.setText(Integer.toString(currentP.getDeck().size()));
+        eDeckSize.setText(Integer.toString(enemyP.getDeck().size()));
+        curMaxMana.setText(Integer.toString(currentP.getMaxMana()));
+        curCurMana.setText(Integer.toString(currentP.getMana()));
+        curManaCap.setText(Integer.toString(currentP.getManacap()));
+
     }
 
     public void refresh() {
@@ -179,27 +200,36 @@ public class GameWindow implements Initializable {
     public void increasePane(Pane pane) {
         pane.setScaleX(1.1);
         pane.setScaleY(1.1);
+        pane.setLayoutY(pane.getLayoutY() - 50);
         pane.getChildren().get(0).setScaleX(1.1);
         pane.getChildren().get(0).setScaleY(1.1);
+        pane.getChildren().get(0).setLayoutY(pane.getChildren().get(0).getLayoutY() - 50);
         pane.getChildren().get(1).setScaleX(1.1);
         pane.getChildren().get(1).setScaleY(1.1);
-        pane.getChildren().get(1).setLayoutX(pane.getChildren().get(1).getLayoutX() + 10);
-        pane.getChildren().get(1).setLayoutY(pane.getChildren().get(1).getLayoutY() + 10);
-        pane.getChildren().get(2).setLayoutX(pane.getChildren().get(2).getLayoutX() + 10);
-        pane.getChildren().get(2).setLayoutY(pane.getChildren().get(2).getLayoutY() + 10);
+        pane.getChildren().get(1).setLayoutY(pane.getChildren().get(1).getLayoutY() - 42);
+        pane.getChildren().get(1).setLayoutX(pane.getChildren().get(1).getLayoutX() - 3);
+        pane.getChildren().get(2).setScaleX(1.1);
+        pane.getChildren().get(2).setScaleY(1.1);
+        pane.getChildren().get(2).setLayoutY(pane.getChildren().get(2).getLayoutY() - 42);
+        pane.getChildren().get(2).setLayoutX(pane.getChildren().get(2).getLayoutX() + 5);
+
     }
 
     public void decreasePane(Pane pane) {
         pane.setScaleX(1);
         pane.setScaleY(1);
+        pane.setLayoutY(pane.getLayoutY() + 50);
         pane.getChildren().get(0).setScaleX(1);
         pane.getChildren().get(0).setScaleY(1);
+        pane.getChildren().get(0).setLayoutY(pane.getChildren().get(0).getLayoutY() + 50);
         pane.getChildren().get(1).setScaleX(1);
         pane.getChildren().get(1).setScaleY(1);
-        pane.getChildren().get(1).setLayoutX(pane.getChildren().get(1).getLayoutX() - 10);
-        pane.getChildren().get(1).setLayoutY(pane.getChildren().get(1).getLayoutY() - 10);
-        pane.getChildren().get(2).setLayoutX(pane.getChildren().get(2).getLayoutX() - 10);
-        pane.getChildren().get(2).setLayoutY(pane.getChildren().get(2).getLayoutY() - 10);
+        pane.getChildren().get(1).setLayoutY(pane.getChildren().get(1).getLayoutY() + 42);
+        pane.getChildren().get(1).setLayoutX(pane.getChildren().get(1).getLayoutX() + 3);
+        pane.getChildren().get(2).setScaleX(1);
+        pane.getChildren().get(2).setScaleY(1);
+        pane.getChildren().get(2).setLayoutY(pane.getChildren().get(2).getLayoutY() + 42);
+        pane.getChildren().get(2).setLayoutX(pane.getChildren().get(2).getLayoutX() - 5);
     }
 
     @Override

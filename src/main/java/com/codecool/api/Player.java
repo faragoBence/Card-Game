@@ -11,7 +11,6 @@ import java.util.Objects;
 public class Player extends Entity {
 
     private int currentMana = 0;
-
     private int maxMana = 0;
     private final List<Card> hand = new ArrayList<>();
     private final List<Card> desk = new ArrayList<>();
@@ -43,6 +42,15 @@ public class Player extends Entity {
 
     public Hero getHero() {
         return hero;
+    }
+
+
+    public int getMaxMana() {
+        return maxMana;
+    }
+
+    public int getManacap() {
+        return manacap;
     }
 
     public void setHero(Hero hero) {

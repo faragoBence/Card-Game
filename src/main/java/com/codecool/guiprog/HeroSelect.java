@@ -57,6 +57,7 @@ public class HeroSelect implements Initializable {
         heroes.add(Hero4);
         heroes.add(Hero5);
         for (int i = 0; i < board.getHeroes().size(); i++) {
+            heroes.get(i).setOnMouseClicked(event -> onClick((Pane) event.getSource()));
             heroes.get(i).setOnMouseEntered(event -> increasePane((Pane) event.getSource()));
             heroes.get(i).setOnMouseExited(event -> decreasePane((Pane) event.getSource()));
             ((ImageView) heroes.get(i).getChildren().get(0)).setImage(new Image(new File(board.getHeroes().get(i).getImagePath()).toURI().toString()));
@@ -81,25 +82,6 @@ public class HeroSelect implements Initializable {
 
     }
 
-    public void clickHero1() {
-        onClick(Hero1);
-    }
-
-    public void clickHero2() {
-        onClick(Hero2);
-    }
-
-    public void clickHero3() {
-        onClick(Hero3);
-    }
-
-    public void clickHero4() {
-        onClick(Hero4);
-    }
-
-    public void clickHero5() {
-        onClick(Hero5);
-    }
 
     public void increasePane(Pane pane) {
         pane.setScaleX(1.2);

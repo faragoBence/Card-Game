@@ -19,7 +19,7 @@
             </image>
         </ImageView>
         <Pane fx:id="Hero2" layoutX="513.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity"
-              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero2" prefHeight="333.0"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0"
               prefWidth="255.0">
             <children>
                 <ImageView fx:id="2" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
@@ -38,7 +38,7 @@
             </children>
         </Pane>
         <Pane fx:id="Hero3" layoutX="907.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity"
-              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero3" prefHeight="333.0"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0"
               prefWidth="255.0">
             <children>
                 <ImageView fx:id="3" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
@@ -57,7 +57,7 @@
             </children>
         </Pane>
         <Pane fx:id="Hero4" layoutX="304.0" layoutY="373.0" maxHeight="-Infinity" maxWidth="-Infinity"
-              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero4" prefHeight="333.0"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0"
               prefWidth="255.0">
             <children>
                 <ImageView fx:id="4" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
@@ -76,7 +76,7 @@
             </children>
         </Pane>
         <Pane fx:id="Hero5" layoutX="720.0" layoutY="373.0" maxHeight="-Infinity" maxWidth="-Infinity"
-              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero5" prefHeight="333.0"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0"
               prefWidth="255.0">
             <children>
                 <ImageView fx:id="5" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
@@ -95,7 +95,7 @@
             </children>
         </Pane>
         <Pane fx:id="Hero1" layoutX="177.0" layoutY="72.0" maxHeight="-Infinity" maxWidth="-Infinity"
-              minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#clickHero1" prefHeight="333.0"
+              minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0"
               prefWidth="255.0">
             <children>
                 <ImageView fx:id="1" fitHeight="350.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">

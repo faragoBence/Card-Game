@@ -22,7 +22,7 @@
                 <Cursor fx:constant="CLOSED_HAND"/>
             </cursor>
         </Button>
-        <Pane fx:id="hand1" layoutX="387.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
+        <Pane fx:id="hand1" layoutX="320.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
             <children>
                 <ImageView fx:id="1" fitHeight="181.0" fitWidth="129.0" layoutY="-2.0" pickOnBounds="true"
                            preserveRatio="true"/>
@@ -38,7 +38,7 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="hand2" layoutX="451.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
+        <Pane fx:id="hand2" layoutX="410.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
             <children>
                 <ImageView fx:id="2" fitHeight="181.0" fitWidth="129.0" layoutY="-2.0" pickOnBounds="true"
                            preserveRatio="true">
@@ -55,7 +55,7 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="hand3" layoutX="515.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
+        <Pane fx:id="hand3" layoutX="500.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
             <children>
                 <ImageView fx:id="3" fitHeight="181.0" fitWidth="129.0" layoutY="-2.0" pickOnBounds="true"
                            preserveRatio="true">
@@ -72,7 +72,7 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="hand4" layoutX="579.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
+        <Pane fx:id="hand4" layoutX="590.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
             <children>
                 <ImageView fx:id="4" fitHeight="181.0" fitWidth="129.0" layoutY="-2.0" pickOnBounds="true"
                            preserveRatio="true">
@@ -89,7 +89,7 @@
                 </Label>
             </children>
         </Pane>
-        <Pane fx:id="hand5" layoutX="643.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
+        <Pane fx:id="hand5" layoutX="680.0" layoutY="603.0" prefHeight="172.0" prefWidth="128.0">
             <children>
                 <ImageView fx:id="5" fitHeight="181.0" fitWidth="129.0" layoutY="-2.0" pickOnBounds="true"
                            preserveRatio="true">
@@ -289,34 +289,39 @@
                 </Label>
             </children>
         </Pane>
-        <Label fx:id="deckSize" layoutX="1053.0" layoutY="486.0" prefHeight="48.0" prefWidth="38.0" textFill="#1b0000">
+        <Label fx:id="deckSize" layoutX="1053.0" layoutY="486.0" prefHeight="48.0" prefWidth="38.0" textFill="#3ccbff">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>
         </Label>
-        <Label fx:id="eDeckSize" layoutX="1053.0" layoutY="129.0" prefHeight="48.0" prefWidth="38.0" textFill="#1b0000">
+        <Label fx:id="eDeckSize" layoutX="1053.0" layoutY="129.0" prefHeight="48.0" prefWidth="38.0" textFill="#da0303">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>
         </Label>
-        <Label fx:id="curMaxMana" layoutX="831.0" layoutY="641.0" prefHeight="48.0" prefWidth="38.0" textFill="#1b0000">
+        <Label fx:id="curMaxMana" layoutX="838.0" layoutY="638.0" prefHeight="48.0" prefWidth="38.0" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>
         </Label>
-        <Label fx:id="curCurMana" layoutX="812.0" layoutY="641.0" prefHeight="48.0" prefWidth="38.0" textFill="#1b0000">
+        <Label fx:id="curCurMana" layoutX="811.0" layoutY="638.0" prefHeight="48.0" prefWidth="38.0" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>
         </Label>
         <Label fx:id="curManaCap" contentDisplay="CENTER" layoutX="1201.0" layoutY="641.0" prefHeight="48.0"
-               prefWidth="38.0" textAlignment="CENTER" textFill="#1b0000">
+               prefWidth="38.0" textAlignment="CENTER" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>
         </Label>
-        <Label fx:id="curManaCap" contentDisplay="CENTER" layoutX="1091.0" layoutY="635.0" prefHeight="48.0"
-               prefWidth="160.0" text="Mana Cap:" textAlignment="CENTER" textFill="#1b0000">
+        <Label contentDisplay="CENTER" layoutX="1091.0" layoutY="641.0" prefHeight="48.0" prefWidth="160.0"
+               text="Mana Cap:" textAlignment="CENTER" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="20.0"/>
+            </font>
+        </Label>
+        <Label layoutX="825.0" layoutY="638.0" prefHeight="48.0" prefWidth="38.0" text="/" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>

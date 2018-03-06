@@ -3,6 +3,7 @@ package com.codecool.guiprog;
 import com.codecool.api.Board;
 import com.codecool.api.Hero;
 import com.codecool.api.Player;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -104,6 +105,7 @@ public class HeroSelect implements Initializable {
         pane.getChildren().get(1).setLayoutX(pane.getChildren().get(1).getLayoutX() - 10);
         pane.getChildren().get(1).setLayoutY(pane.getChildren().get(1).getLayoutY() - 10);
     }
+
     public ColorAdjust makeBlackWhite() {
         ColorAdjust colorAdjust = new ColorAdjust();
         colorAdjust.setSaturation(-1);
@@ -128,6 +130,12 @@ public class HeroSelect implements Initializable {
         GameWindow gameWindow = Loader.getController();
         gameWindow.setThis(stage);
         gameWindow.settleUp(currentPlayer, enemy, board);
+        stage.setTitle("Stoned Hearth");
+        stage.setResizable(false);
+        stage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
         stage.show();
         thisStage.close();
     }

@@ -2,6 +2,7 @@ package com.codecool.guiprog;
 
 import com.codecool.api.Board;
 import com.codecool.api.Player;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -53,6 +54,12 @@ public class NameEnterController implements Initializable {
         Stage stage = new Stage();
         stage.setScene(new Scene(p));
         heroSelect.setThis(stage);
+        stage.setTitle("Stoned Hearth");
+        stage.setResizable(false);
+        stage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
         stage.show();
         thisStage.close();
 

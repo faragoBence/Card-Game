@@ -46,8 +46,9 @@ public class GameWindow implements Initializable {
     Stage thisStage;
 
 
-    private void alert(String alertMessage) {
+    private void alert(String title, String alertMessage) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
         alert.setHeaderText(alertMessage);
         alert.show();
     }
@@ -56,6 +57,11 @@ public class GameWindow implements Initializable {
         currentP = current;
         this.enemyP = enemyP;
         this.board = board;
+        try {
+            currentP.startRound();
+        } catch (EntityIsDeadException e) {
+            alert("Entity is dead", "Sorry, but u can't do this, because the entity is dead!");
+        }
         initHand();
         initDesk();
         initEDesk();
@@ -90,6 +96,7 @@ public class GameWindow implements Initializable {
                 if (currentP.getDesk().get(i) instanceof Minion) {
                     ((Label) desk.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) currentP.getDesk().get(i)).getAttack()));
                     ((Label) desk.get(i).getChildren().get(2)).setText(Integer.toString((currentP.getDesk().get(i)).getHealth()));
+                    desk.get(i).toFront();
                 } else {
                     ((Label) desk.get(i).getChildren().get(1)).setText(null);
                     ((Label) desk.get(i).getChildren().get(2)).setText(null);
@@ -98,6 +105,7 @@ public class GameWindow implements Initializable {
                 ((ImageView) desk.get(i).getChildren().get(0)).setImage(null);
                 ((Label) desk.get(i).getChildren().get(1)).setText(null);
                 ((Label) desk.get(i).getChildren().get(2)).setText(null);
+                desk.get(i).toBack();
             }
         }
     }
@@ -109,9 +117,11 @@ public class GameWindow implements Initializable {
                 if (enemyP.getDesk().get(i) instanceof Minion) {
                     ((Label) eDesk.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) enemyP.getDesk().get(i)).getAttack()));
                     ((Label) eDesk.get(i).getChildren().get(2)).setText(Integer.toString((enemyP.getDesk().get(i)).getHealth()));
+                    eDesk.get(i).toFront();
                 } else {
                     ((Label) eDesk.get(i).getChildren().get(1)).setText(null);
                     ((Label) eDesk.get(i).getChildren().get(2)).setText(null);
+                    eDesk.get(i).toBack();
                 }
             } else {
                 ((ImageView) eDesk.get(i).getChildren().get(0)).setImage(null);
@@ -155,9 +165,9 @@ public class GameWindow implements Initializable {
                     currentP.placeCard(Integer.parseInt(((Pane) event.getSource()).getChildren().get(0).getId()) - 1);
                     refresh();
                 } catch (NoMoreRoomOnDeskException e) {
-                    alert("No more room in the desk!");
+                    alert("No more room in the desk!", "You can't place more card!");
                 } catch (NotEnoughManaException e) {
-                    alert("Not enough mana!");
+                    alert("Not enough mana!", "You haven't got enough mana to place this card!");
                 }
             });
             pane.setOnMouseEntered(event -> increasePane((Pane) event.getSource()));
@@ -192,7 +202,7 @@ public class GameWindow implements Initializable {
         try {
             currentP.startRound();
         } catch (EntityIsDeadException ex) {
-            alert("Entity is dead!");
+            alert("Entity is dead", "Sorry, but u can't do this, because the entity is dead!");
         }
         refresh();
     }
@@ -212,6 +222,7 @@ public class GameWindow implements Initializable {
         pane.getChildren().get(2).setScaleY(1.1);
         pane.getChildren().get(2).setLayoutY(pane.getChildren().get(2).getLayoutY() - 42);
         pane.getChildren().get(2).setLayoutX(pane.getChildren().get(2).getLayoutX() + 5);
+        pane.toFront();
 
     }
 

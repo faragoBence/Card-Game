@@ -1,5 +1,6 @@
 package com.codecool.guiprog;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -28,6 +29,12 @@ public class MenuController implements Initializable {
         stage.setScene(new Scene(p));
         NameEnterController nameEnterController = Loader.getController();
         nameEnterController.setThis(stage);
+        stage.setTitle("Stoned Hearth");
+        stage.setResizable(false);
+        stage.setOnCloseRequest(t -> {
+            Platform.exit();
+            System.exit(0);
+        });
         stage.show();
         thisStage.close();
 

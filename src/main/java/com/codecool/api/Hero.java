@@ -9,10 +9,12 @@ import java.util.Random;
 public class Hero {
     private final String name;
     private final String imagePath;
+    private final String fullImagePath;
     private final Random random = new Random();
     private final List<Card> deck;
 
-    public Hero(String name, String imagePath) {
+    public Hero(String name, String imagePath, String fullImagePath) {
+        this.fullImagePath = fullImagePath;
         this.name = name;
         this.imagePath = imagePath;
         deck = new ArrayList<>();
@@ -29,6 +31,10 @@ public class Hero {
 
     public String getImagePath() {
         return imagePath;
+    }
+
+    public String getFullImagePath() {
+        return fullImagePath;
     }
 
     //Method

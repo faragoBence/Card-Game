@@ -11,9 +11,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -35,7 +37,7 @@ public class GameWindow implements Initializable {
     Label deckSize, eDeckSize;
     private List<Pane> hand;
     @FXML
-    Label curMaxMana, curCurMana, curManaCap;
+    Label curMaxMana, curCurMana, curManaCap, enemyCurMana, enemyMaxMana;
 
     private List<Pane> desk;
     private List<Pane> eDesk;
@@ -57,6 +59,11 @@ public class GameWindow implements Initializable {
         currentP = current;
         this.enemyP = enemyP;
         this.board = board;
+        hero.setOnMouseEntered(event -> ((Pane) event.getSource()).setEffect(glow(Color.GREEN)));
+        enemyHero.setOnMouseEntered(event -> ((Pane) event.getSource()).setEffect(glow(Color.DARKRED)));
+        hero.setOnMouseExited(event -> ((Pane) event.getSource()).setEffect(null));
+        enemyHero.setOnMouseExited(event -> ((Pane) event.getSource()).setEffect(null));
+
         try {
             currentP.startRound();
         } catch (EntityIsDeadException e) {
@@ -132,15 +139,19 @@ public class GameWindow implements Initializable {
     }
 
     public void refreshHeroes() {
-        ((ImageView) enemyHero.getChildren().get(0)).setImage((new Image(new File(enemyP.getHero().getImagePath()).toURI().toString())));
+        ((ImageView) enemyHero.getChildren().get(0)).setImage((new Image(new File(enemyP.getHero().getFullImagePath()).toURI().toString())));
         ((Label) enemyHero.getChildren().get(1)).setText(Integer.toString(enemyP.getHealth()));
-        ((ImageView) hero.getChildren().get(0)).setImage((new Image(new File(currentP.getHero().getImagePath()).toURI().toString())));
+        ((ImageView) hero.getChildren().get(0)).setImage((new Image(new File(currentP.getHero().getFullImagePath()).toURI().toString())));
         ((Label) hero.getChildren().get(1)).setText(Integer.toString(currentP.getHealth()));
         deckSize.setText(Integer.toString(currentP.getDeck().size()));
         eDeckSize.setText(Integer.toString(enemyP.getDeck().size()));
         curMaxMana.setText(Integer.toString(currentP.getMaxMana()));
         curCurMana.setText(Integer.toString(currentP.getMana()));
         curManaCap.setText(Integer.toString(currentP.getManacap()));
+        enemyCurMana.setText(Integer.toString(enemyP.getMana()));
+        enemyMaxMana.setText(Integer.toString(enemyP.getMaxMana()));
+
+
 
     }
 
@@ -182,6 +193,10 @@ public class GameWindow implements Initializable {
         desk.add(desk3);
         desk.add(desk4);
         desk.add(desk5);
+        for (Pane pane : desk) {
+            pane.setOnMouseEntered(event -> ((Pane) event.getSource()).setEffect(glow(Color.YELLOWGREEN)));
+            pane.setOnMouseExited(event -> ((Pane) event.getSource()).setEffect(null));
+        }
     }
 
     private void initEDesk() {
@@ -191,6 +206,10 @@ public class GameWindow implements Initializable {
         eDesk.add(eDesk3);
         eDesk.add(eDesk4);
         eDesk.add(eDesk5);
+        for (Pane pane : eDesk) {
+            pane.setOnMouseEntered(event -> ((Pane) event.getSource()).setEffect(glow(Color.RED)));
+            pane.setOnMouseExited(event -> ((Pane) event.getSource()).setEffect(null));
+        }
     }
 
 
@@ -241,6 +260,15 @@ public class GameWindow implements Initializable {
         pane.getChildren().get(2).setScaleY(1);
         pane.getChildren().get(2).setLayoutY(pane.getChildren().get(2).getLayoutY() + 42);
         pane.getChildren().get(2).setLayoutX(pane.getChildren().get(2).getLayoutX() - 5);
+    }
+
+    private DropShadow glow(Color color) {
+        DropShadow shadow = new DropShadow();
+        shadow.setColor(color);
+        shadow.setRadius(33);
+        shadow.setWidth(65.5);
+        shadow.setHeight(68.5);
+        return shadow;
     }
 
     @Override

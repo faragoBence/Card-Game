@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Heroes>
-    <Hero name="Murloc King" image="src/main/resources/heroimgs/Murloc King.png"/>
-    <Hero name="Sidious" image="src/main/resources/heroimgs/Sidious.png"/>
-    <Hero name="Warlock" image="src/main/resources/heroimgs/Warlock.png"/>
-    <Hero name="Sauron" image="src/main/resources/heroimgs/Sauron.png"/>
-    <Hero name="Team Rocket" image="src/main/resources/heroimgs/Team Rocket.png"/>
+    <Hero name="Murloc King" image="src/main/resources/heroimgs/Murloc King.png"
+          fullImage="src/main/resources/heroimgs/Murloc King Full.png"/>
+    <Hero name="Sidious" image="src/main/resources/heroimgs/Sidious.png"
+          fullImage="src/main/resources/heroimgs/Sidious Full.png"/>
+    <Hero name="Warlock" image="src/main/resources/heroimgs/Warlock.png"
+          fullImage="src/main/resources/heroimgs/Warlock Full.png"/>
+    <Hero name="Sauron" image="src/main/resources/heroimgs/Sauron.png"
+          fullImage="src/main/resources/heroimgs/Sauron Full.png"/>
+    <Hero name="Team Rocket" image="src/main/resources/heroimgs/Team Rocket.png"
+          fullImage="src/main/resources/heroimgs/Team Rocket Full.png"/>
 </Heroes>

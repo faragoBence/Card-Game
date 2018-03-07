@@ -49,7 +49,7 @@ public class HeroParser implements Parser {
         for (int i = 0; i < heroes.getLength(); i++) {
             currentElement = (Element) heroes.item(i);
             currentHero = new Hero(currentElement.getAttribute("name"),
-                    currentElement.getAttribute("image"));
+                    currentElement.getAttribute("image"), currentElement.getAttribute("fullImage"));
             heroList.add(currentHero);
         }
     }

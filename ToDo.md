@@ -9,5 +9,5 @@
 
 
 
-###Making pictures for the cards.
 ###? Making the desk and hand size to 7
+### Get rid of Legendary cards, ccause the label is out of position.

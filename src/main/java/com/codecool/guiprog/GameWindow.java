@@ -1,11 +1,10 @@
 package com.codecool.guiprog;
 
 import com.codecool.api.Board;
+import com.codecool.api.Entity;
 import com.codecool.api.Minion;
 import com.codecool.api.Player;
-import com.codecool.api.exceptions.EntityIsDeadException;
-import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
-import com.codecool.api.exceptions.NotEnoughManaException;
+import com.codecool.api.exceptions.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -34,7 +33,7 @@ public class GameWindow implements Initializable {
     @FXML
     Pane desk1, desk2, desk3, desk4, desk5, hero, enemyHero;
     @FXML
-    Label deckSize, eDeckSize;
+    Label deckSize, eDeckSize, Name;
     private List<Pane> hand;
     @FXML
     Label curMaxMana, curCurMana, curManaCap, enemyCurMana, enemyMaxMana;
@@ -46,6 +45,7 @@ public class GameWindow implements Initializable {
     private Player enemyP;
     private Board board;
     Stage thisStage;
+    Entity attacker = null;
 
 
     private void alert(String title, String alertMessage) {
@@ -104,6 +104,11 @@ public class GameWindow implements Initializable {
                     ((Label) desk.get(i).getChildren().get(1)).setText(Integer.toString(((Minion) currentP.getDesk().get(i)).getAttack()));
                     ((Label) desk.get(i).getChildren().get(2)).setText(Integer.toString((currentP.getDesk().get(i)).getHealth()));
                     desk.get(i).toFront();
+                    if (((Minion) currentP.getDesk().get(i)).canAttack()) {
+                        desk.get(i).setEffect(glow(Color.DARKSEAGREEN));
+                    } else {
+                        desk.get(i).setEffect(glow(null));
+                    }
                 } else {
                     ((Label) desk.get(i).getChildren().get(1)).setText(null);
                     ((Label) desk.get(i).getChildren().get(2)).setText(null);
@@ -143,6 +148,35 @@ public class GameWindow implements Initializable {
         ((Label) enemyHero.getChildren().get(1)).setText(Integer.toString(enemyP.getHealth()));
         ((ImageView) hero.getChildren().get(0)).setImage((new Image(new File(currentP.getHero().getFullImagePath()).toURI().toString())));
         ((Label) hero.getChildren().get(1)).setText(Integer.toString(currentP.getHealth()));
+        enemyHero.setOnMouseClicked(event -> {
+            try {
+                handleAttack((Pane) event.getSource());
+            } catch (SelfTargetException e) {
+                alert("You attacked yourself!", "You can't attack your hero!");
+                attacker = null;
+            } catch (CanNotAttackException e) {
+                alert("You can't attack!", "This card can't attack more in this round!");
+                attacker = null;
+            } catch (TargetisStealthException e) {
+                alert("You can't attack Stealth!", "The target you selected is in Stealth mode!");
+                attacker = null;
+            }
+        });
+
+        hero.setOnMouseClicked(event -> {
+            try {
+                handleAttack((Pane) event.getSource());
+            } catch (SelfTargetException e) {
+                alert("You attacked yourself!", "You can't attack your hero!");
+                attacker = null;
+            } catch (CanNotAttackException e) {
+                alert("You can't attack!", "This card can't attack more in this round!");
+                attacker = null;
+            } catch (TargetisStealthException e) {
+                alert("You can't attack Stealth!", "The target you selected is in Stealth mode!");
+                attacker = null;
+            }
+        });
         deckSize.setText(Integer.toString(currentP.getDeck().size()));
         eDeckSize.setText(Integer.toString(enemyP.getDeck().size()));
         curMaxMana.setText(Integer.toString(currentP.getMaxMana()));
@@ -150,8 +184,11 @@ public class GameWindow implements Initializable {
         curManaCap.setText(Integer.toString(currentP.getManacap()));
         enemyCurMana.setText(Integer.toString(enemyP.getMana()));
         enemyMaxMana.setText(Integer.toString(enemyP.getMaxMana()));
-
-
+        if (attacker != null) {
+            Name.setText(attacker.getName());
+        } else {
+            Name.setVisible(false);
+        }
 
     }
 
@@ -196,6 +233,20 @@ public class GameWindow implements Initializable {
         for (Pane pane : desk) {
             pane.setOnMouseEntered(event -> ((Pane) event.getSource()).setEffect(glow(Color.YELLOWGREEN)));
             pane.setOnMouseExited(event -> ((Pane) event.getSource()).setEffect(null));
+            pane.setOnMouseClicked(event -> {
+                try {
+                    handleAttack((Pane) event.getSource());
+                } catch (SelfTargetException e) {
+                    alert("You attacked yourself!", "You can't attack your hero!");
+                    attacker = null;
+                } catch (CanNotAttackException e) {
+                    alert("You can't attack!", "This card can't attack more in this round!");
+                    attacker = null;
+                } catch (TargetisStealthException e) {
+                    alert("You can't attack Stealth!", "The target you selected is in Stealth mode!");
+                    attacker = null;
+                }
+            });
         }
     }
 
@@ -209,8 +260,23 @@ public class GameWindow implements Initializable {
         for (Pane pane : eDesk) {
             pane.setOnMouseEntered(event -> ((Pane) event.getSource()).setEffect(glow(Color.RED)));
             pane.setOnMouseExited(event -> ((Pane) event.getSource()).setEffect(null));
+            pane.setOnMouseClicked(event -> {
+                try {
+                    handleAttack((Pane) event.getSource());
+                } catch (SelfTargetException e) {
+                    alert("You attacked yourself!", "You can't attack your hero!");
+                    attacker = null;
+                } catch (CanNotAttackException e) {
+                    alert("You can't attack!", "This card can't attack more in this round!");
+                    attacker = null;
+                } catch (TargetisStealthException e) {
+                    alert("You can't attack Stealth!", "The target you selected is in Stealth mode!");
+                    attacker = null;
+                }
+            });
         }
-    }
+        }
+
 
 
     // Game Screen - Method(s)
@@ -223,6 +289,7 @@ public class GameWindow implements Initializable {
         } catch (EntityIsDeadException ex) {
             alert("Entity is dead", "Sorry, but u can't do this, because the entity is dead!");
         }
+        attacker = null;
         refresh();
     }
 
@@ -273,6 +340,40 @@ public class GameWindow implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+    public void handleAttack(Pane pane) throws SelfTargetException, CanNotAttackException, TargetisStealthException {
+        String id = pane.getChildren().get(0).getId();
+        if (attacker == null) {
+            if (!id.equals("hero1") && !id.equals("hero2")) {
+                String[] alphabets = id.split("");
+                if (alphabets[0].equals("p")) {
+                    if (((Minion) currentP.getDesk().get(Integer.parseInt(alphabets[1]) - 1)).canAttack()) {
+                        attacker = currentP.getDesk().get(Integer.parseInt(alphabets[1]) - 1);
+                    } else {
+                        throw new CanNotAttackException();
+                    }
+                }
+            }
+        } else {
+            if (id.equals("hero1")) {
+                throw new SelfTargetException();
+            } else if (id.equals("hero2")) {
+                ((Minion) attacker).attack(enemyP);
+                attacker = null;
+            } else {
+                String[] alphabets = id.split("");
+                if (alphabets[0].equals("p")) {
+                    throw new SelfTargetException();
+                } else {
+                    Minion target = (Minion) enemyP.getDesk().get(Integer.parseInt(alphabets[1]) - 1);
+                    ((Minion) attacker).attack(target);
+                    attacker = null;
+                }
+            }
+        }
+        refresh();
 
     }
 

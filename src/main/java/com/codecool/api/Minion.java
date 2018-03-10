@@ -1,9 +1,6 @@
 package com.codecool.api;
 
-import com.codecool.api.exceptions.CanNotAttackException;
-import com.codecool.api.exceptions.NoMoreRoomOnDeskException;
-import com.codecool.api.exceptions.SelfTargetException;
-import com.codecool.api.exceptions.TargetisStealthException;
+import com.codecool.api.exceptions.*;
 
 public class Minion extends Card {
 
@@ -45,34 +42,41 @@ public class Minion extends Card {
 
 
     // Method(s)
-    public void attack(Minion targetCard) throws SelfTargetException, CanNotAttackException, TargetisStealthException {
+    public void attack(Minion targetCard, Player enemy) throws SelfTargetException, CanNotAttackException, TargetisStealthException, TauntOnBoardException {
         if (this == targetCard) {
             throw new SelfTargetException();
         }
         if (canAttack) {
-            if (getAbility().equals("Stealth")) {
-                ability = "Nothing";
-            }
-            int penaltyDamage = targetCard.getAttack();
-            if (targetCard.getAbility() != "Stealth") {
-                targetCard.takeDamage(attack);
-                takeDamage(penaltyDamage);
-                setCanAttack(false);
+            if (enemy.attackable() || targetCard.getAbility().equals("Taunt")) {
+                int penaltyDamage = targetCard.getAttack();
+                if (!targetCard.getAbility().equals("Stealth")) {
+                    targetCard.takeDamage(attack);
+                    takeDamage(penaltyDamage);
+                    setCanAttack(false);
+                    if (ability.equals("Stealth")) {
+                        ability = "Nothing";
+                    }
+                } else {
+                    throw new TargetisStealthException();
+                }
             } else {
-                throw new TargetisStealthException();
+                throw new TauntOnBoardException();
             }
         } else {
             throw new CanNotAttackException();
         }
     }
 
-    public void attack(Player player) throws CanNotAttackException {
+    public void attack(Player player) throws CanNotAttackException, TauntOnBoardException {
         if (canAttack) {
             if (player.attackable()) {
                 player.takeDamage(attack);
                 setCanAttack(false);
+                if (ability.equals("Stealth")) {
+                    ability = "Nothing";
+                }
             } else {
-                throw new CanNotAttackException();
+                throw new TauntOnBoardException();
             }
         } else {
             throw new CanNotAttackException();

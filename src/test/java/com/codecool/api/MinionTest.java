@@ -3,6 +3,7 @@ package com.codecool.api;
 import com.codecool.api.exceptions.CanNotAttackException;
 import com.codecool.api.exceptions.SelfTargetException;
 import com.codecool.api.exceptions.TargetisStealthException;
+import com.codecool.api.exceptions.TauntOnBoardException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,7 @@ class MinionTest {
 
     private Minion card1;
     private Minion card2;
+    private Player enemy;
 
     @BeforeEach
     void setUp() {
@@ -28,20 +30,20 @@ class MinionTest {
     }
 
     @Test
-    void testAttack() throws SelfTargetException, CanNotAttackException, TargetisStealthException {
-        assertThrows(SelfTargetException.class, () -> card1.attack(card1));
+    void testAttack() throws SelfTargetException, CanNotAttackException, TargetisStealthException, TauntOnBoardException {
+        assertThrows(SelfTargetException.class, () -> card1.attack(card1, enemy));
         assertFalse(card1.canAttack());
-        assertThrows(CanNotAttackException.class, () -> card1.attack(card2));
+        assertThrows(CanNotAttackException.class, () -> card1.attack(card2, enemy));
 
         card1.setCanAttack(true);
         assertTrue(card1.canAttack());
-        card1.attack(card2);
+        card1.attack(card2, enemy);
         assertFalse(card1.isAlive());
         assertEquals(8, card2.getHealth());
         assertTrue(card2.isAlive());
 
-        assertThrows(SelfTargetException.class, () -> card2.attack(card2));
+        assertThrows(SelfTargetException.class, () -> card2.attack(card2, enemy));
         card2.setCanAttack(true);
-        card2.attack(card1);
+        card2.attack(card1, enemy);
     }
 }

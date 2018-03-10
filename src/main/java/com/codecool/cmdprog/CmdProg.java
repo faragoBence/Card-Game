@@ -198,7 +198,7 @@ class CmdProg {
             if (args.length > 2) {
                 int index2 = Integer.parseInt(args[2]);
                 if (index1 <= currentPlayer.getDesk().size() && index2 <= enemy.getDesk().size()) {
-                    ((Minion) currentPlayer.getDesk().get(index1 - 1)).attack(((Minion) enemy.getDesk().get(index2 - 1)));
+                    ((Minion) currentPlayer.getDesk().get(index1 - 1)).attack(((Minion) enemy.getDesk().get(index2 - 1)), enemy);
                 } else {
                     System.out.println("Wrong input entered!");
                 }
@@ -217,6 +217,8 @@ class CmdProg {
             System.out.println("Cannot attack yourself!");
         } catch (TargetisStealthException ex) {
             System.out.println("The target is Stealth!");
+        } catch (TauntOnBoardException ex) {
+            System.out.println("A target minion is on the board!");
         }
     }
 

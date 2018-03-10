@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -110,6 +111,12 @@
             <children>
                 <ImageView fx:id="p1" fitHeight="181.0" fitWidth="129.0" layoutY="-2.0" pickOnBounds="true"
                            preserveRatio="true">
+                    <image>
+                        <Image url="@cardimgs/Charmander.png"/>
+                    </image>
+                    <effect>
+                        <InnerShadow choke="0.71" color="WHITE"/>
+                    </effect>
                 </ImageView>
                 <Label layoutX="15.0" layoutY="140.0" prefHeight="0.0" prefWidth="19.0" textFill="WHITE">
                     <font>
@@ -300,7 +307,7 @@
                 </Label>
             </children>
         </Pane>
-        <Label fx:id="deckSize" layoutX="1053.0" layoutY="486.0" prefHeight="48.0" prefWidth="38.0" textFill="#3ccbff">
+        <Label fx:id="deckSize" layoutX="1053.0" layoutY="486.0" prefHeight="48.0" prefWidth="38.0" textFill="#05ff15">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>

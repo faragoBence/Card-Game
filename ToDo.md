@@ -7,7 +7,9 @@
 ###Voldemort
 ###Ghostking
 
-
+##End game
+###Break the game somehow if a character dies.
+###New fxml with with new game function.
 
 ###? Making the desk and hand size to 7
 ### Get rid of Legendary cards, cause the label is out of position.

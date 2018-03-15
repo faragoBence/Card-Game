@@ -4,7 +4,7 @@
         <Minion name="Gollum" description="Battlecry: Charge" manacost="1" attack="1" health="2"/>
         <Minion name="Uruk-hai" description="Nothing" manacost="2" attack="2" health="2"/>
         <Minion name="Troll" description="Battlecry: Taunt" manacost="4" attack="2" health="5"/>
-        <Minion name="Goblin" description="Nothing" manacost="1" attack="2" health="1"/>
+        <Minion name="Goblin Warrior" description="Nothing" manacost="1" attack="2" health="1"/>
         <Minion name="Orc" description="Battlecry: Charge" manacost="2" attack="3" health="2"/>
         <Minion name="Goblin King" description="Deathrattle: Summon 2 Goblin with 1 health and 2 attack" manacost="4"
                 attack="2" health="2"/>

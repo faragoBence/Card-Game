@@ -4,9 +4,9 @@
         <Minion name="Meowth" description="Deathrattle: Draw 2 cards" manacost="4" attack="3" health="3"/>
         <Minion name="Ekans" description="Battlecry: Stealth" manacost="5" attack="4" health="4"/>
         <Minion name="Koffing" description="Battlecry: Stealth" manacost="8" attack="6" health="6"/>
-        <Minion name="Jessie" description="Deathrattle: Summon 1 Ekans with 4 health and 4 attack" manacost="7"
+        <Minion name="Jessie" description="Deathrattle: Summon 1 Geodude with 4 health and 4 attack" manacost="7"
                 attack="4" health="2"/>
-        <Minion name="James" description="Deathrattle: Summon 1 Victreebel with 1 health and 2 attack" manacost="4"
+        <Minion name="James" description="Deathrattle: Summon 1 Shellder with 1 health and 2 attack" manacost="4"
                 attack="2" health="4"/>
         <Minion name="Victreebel" description="Battlecry: Charge" manacost="1" attack="2" health="1"/>
         <Minion name="Gastly" description="Nothing" manacost="2" attack="2" health="2"/>

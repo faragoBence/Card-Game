@@ -1,9 +1,6 @@
 package com.codecool.guiprog;
 
-import com.codecool.api.Board;
-import com.codecool.api.Entity;
-import com.codecool.api.Minion;
-import com.codecool.api.Player;
+import com.codecool.api.*;
 import com.codecool.api.exceptions.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,7 +32,7 @@ public class GameWindow implements Initializable {
     @FXML
     Pane desk1, desk2, desk3, desk4, desk5, hero, enemyHero;
     @FXML
-    Label deckSize, eDeckSize, Name;
+    Label deckSize, eDeckSize, Attacker, MagicCardName;
     private List<Pane> hand;
     @FXML
     Label curMaxMana, curCurMana, curManaCap, enemyCurMana, enemyMaxMana;
@@ -48,6 +45,8 @@ public class GameWindow implements Initializable {
     private Board board;
     Stage thisStage;
     Entity attacker = null;
+    MagicCard magicCard = null;
+    Pane magicCardPane = null;
 
 
     private void alert(String title, String alertMessage) {
@@ -107,7 +106,7 @@ public class GameWindow implements Initializable {
                     ((Label) desk.get(i).getChildren().get(2)).setText(Integer.toString((currentP.getDesk().get(i)).getHealth()));
                     desk.get(i).toFront();
                     if (((Minion) currentP.getDesk().get(i)).canAttack()) {
-                        desk.get(i).setEffect(glow(Color.RED));
+                        desk.get(i).setEffect(glow(Color.LIGHTGOLDENRODYELLOW));
                     } else {
                         desk.get(i).setEffect(null);
                     }
@@ -179,6 +178,16 @@ public class GameWindow implements Initializable {
             } catch (TauntOnBoardException e) {
                 alert("Taunt on Board!", "You can't attack him, because a taunt card is on the enemy board.");
                 attacker = null;
+            } catch (NoMoreRoomOnDeskException e) {
+                alert("No more room in the desk!", "You can't place more card!");
+                magicCard = null;
+                magicCardPane = null;
+            } catch (WrongTargetException e) {
+                alert("Wrong target!", "This magic cannot be applied with this target.");
+                magicCard = null;
+                magicCardPane = null;
+            } catch (NotEnoughManaException e) {
+                alert("Not enough mana!", "You haven't got enough mana to place this card!");
             }
             refresh();
         });
@@ -198,6 +207,16 @@ public class GameWindow implements Initializable {
             } catch (TauntOnBoardException e) {
                 alert("Taunt on Board!", "You can't attack him, because a taunt card is on the enemy board.");
                 attacker = null;
+            } catch (NoMoreRoomOnDeskException e) {
+                alert("No more room in the desk!", "You can't place more card!");
+                magicCard = null;
+                magicCardPane = null;
+            } catch (WrongTargetException e) {
+                alert("Wrong target!", "This magic cannot be applied with this target.");
+                magicCard = null;
+                magicCardPane = null;
+            } catch (NotEnoughManaException e) {
+                alert("Not enough mana!", "You haven't got enough mana to place this card!");
             }
             refresh();
         });
@@ -209,10 +228,16 @@ public class GameWindow implements Initializable {
         enemyCurMana.setText(Integer.toString(enemyP.getMana()));
         enemyMaxMana.setText(Integer.toString(enemyP.getMaxMana()));
         if (attacker != null) {
-            Name.setText(attacker.getName());
-            Name.setVisible(true);
+            Attacker.setText(attacker.getName());
+            Attacker.setVisible(true);
         } else {
-            Name.setVisible(false);
+            Attacker.setVisible(false);
+        }
+        if (magicCard != null) {
+            MagicCardName.setText(magicCard.getName());
+            MagicCardName.setVisible(true);
+        } else {
+            MagicCardName.setVisible(false);
         }
 
     }
@@ -241,7 +266,7 @@ public class GameWindow implements Initializable {
         for (Pane pane : hand) {
             pane.setOnMouseClicked(event -> {
                 try {
-                    currentP.placeCard(Integer.parseInt(((Pane) event.getSource()).getChildren().get(0).getId()) - 1);
+                    handlePlaceCard(((Pane) event.getSource()));
                 } catch (NoMoreRoomOnDeskException e) {
                     alert("No more room in the desk!", "You can't place more card!");
                 } catch (NotEnoughManaException e) {
@@ -267,12 +292,11 @@ public class GameWindow implements Initializable {
                 Pane temp = ((Pane) event.getSource());
                 String id = temp.getChildren().get(0).getId().split("")[1];
                 if (((Minion) currentP.getDesk().get(Integer.parseInt(id) - 1)).canAttack()) {
-                    temp.setEffect(glow(Color.RED));
+                    temp.setEffect(glow(Color.LIGHTGOLDENRODYELLOW));
                 } else {
                     ((Pane) event.getSource()).setEffect(null);
                     refresh();
                 }
-                ;
             });
             pane.setOnMouseClicked(event -> {
                 try {
@@ -289,6 +313,16 @@ public class GameWindow implements Initializable {
                 } catch (TauntOnBoardException e) {
                     alert("Taunt on Board!", "You can't attack him, because a taunt card is on the enemy board.");
                     attacker = null;
+                } catch (NoMoreRoomOnDeskException e) {
+                    alert("No more room in the desk!", "You can't place more card!");
+                    magicCard = null;
+                    magicCardPane = null;
+                } catch (WrongTargetException e) {
+                    alert("Wrong target!", "This magic cannot be applied with this target.");
+                    magicCard = null;
+                    magicCardPane = null;
+                } catch (NotEnoughManaException e) {
+                    alert("Not enough mana!", "You haven't got enough mana to place this card!");
                 }
                 refresh();
             });
@@ -320,6 +354,16 @@ public class GameWindow implements Initializable {
                 } catch (TauntOnBoardException e) {
                     alert("Taunt on Board!", "You can't attack him, because a taunt card is on the enemy board.");
                     attacker = null;
+                } catch (NoMoreRoomOnDeskException e) {
+                    alert("No more room in the desk!", "You can't place more card!");
+                    magicCard = null;
+                    magicCardPane = null;
+                } catch (WrongTargetException e) {
+                    alert("Wrong target!", "This magic cannot be applied with this target.");
+                    magicCard = null;
+                    magicCardPane = null;
+                } catch (NotEnoughManaException e) {
+                    alert("Not enough mana!", "You haven't got enough mana to place this card!");
                 }
                 refresh();
             });
@@ -339,6 +383,8 @@ public class GameWindow implements Initializable {
             alert("Entity is dead", "Sorry, but u can't do this, because the entity is dead!");
         }
         attacker = null;
+        magicCard = null;
+        magicCardPane = null;
         refresh();
     }
 
@@ -408,41 +454,76 @@ public class GameWindow implements Initializable {
 
     }
 
-    public void handleAttack(Pane pane) throws SelfTargetException, CanNotAttackException, TargetisStealthException, TauntOnBoardException {
+    public void handleAttack(Pane pane) throws SelfTargetException, CanNotAttackException, TargetisStealthException, TauntOnBoardException, NoMoreRoomOnDeskException, WrongTargetException, NotEnoughManaException {
         String id = pane.getChildren().get(0).getId();
-        if (attacker == null) {
-            if (!id.equals("hero1") && !id.equals("hero2")) {
-                String[] alphabets = id.split("");
-                if (alphabets[0].equals("p")) {
-                    if (((Minion) currentP.getDesk().get(Integer.parseInt(alphabets[1]) - 1)).canAttack()) {
-                        attacker = currentP.getDesk().get(Integer.parseInt(alphabets[1]) - 1);
+        if (magicCard == null) {
+            if (attacker == null) {
+                if (!id.equals("hero1") && !id.equals("hero2")) {
+                    String[] alphabets = id.split("");
+                    if (alphabets[0].equals("p")) {
+                        if (((Minion) currentP.getDesk().get(Integer.parseInt(alphabets[1]) - 1)).canAttack()) {
+                            attacker = currentP.getDesk().get(Integer.parseInt(alphabets[1]) - 1);
+                        } else {
+                            throw new CanNotAttackException();
+                        }
+                    }
+                }
+            } else {
+                if (id.equals("hero1")) {
+                    throw new SelfTargetException();
+                } else if (id.equals("hero2")) {
+                    ((Minion) attacker).attack(enemyP);
+                    attacker = null;
+                } else {
+                    String[] alphabets = id.split("");
+                    if (alphabets[0].equals("p")) {
+                        throw new SelfTargetException();
                     } else {
-                        throw new CanNotAttackException();
+                        Minion target = (Minion) enemyP.getDesk().get(Integer.parseInt(alphabets[1]) - 1);
+                        ((Minion) attacker).attack(target, enemyP);
+                        attacker = null;
                     }
                 }
             }
+            refresh();
         } else {
             if (id.equals("hero1")) {
-                throw new SelfTargetException();
+                magicCard.doMagic(currentP);
             } else if (id.equals("hero2")) {
-                ((Minion) attacker).attack(enemyP);
-                attacker = null;
+                magicCard.doMagic(enemyP);
             } else {
                 String[] alphabets = id.split("");
                 if (alphabets[0].equals("p")) {
-                    throw new SelfTargetException();
+                    Minion target = (Minion) currentP.getDesk().get(Integer.parseInt(alphabets[1]) - 1);
+                    magicCard.doMagic(target);
                 } else {
                     Minion target = (Minion) enemyP.getDesk().get(Integer.parseInt(alphabets[1]) - 1);
-                    ((Minion) attacker).attack(target, enemyP);
-                    attacker = null;
+                    magicCard.doMagic(target);
                 }
             }
+            currentP.placeCard(Integer.parseInt(magicCardPane.getChildren().get(0).getId()) - 1);
+            magicCard = null;
+            magicCardPane = null;
         }
-        refresh();
-
     }
+
 
     public void setThis(Stage stage) {
         thisStage = stage;
+    }
+
+    public void handlePlaceCard(Pane pane) throws NoMoreRoomOnDeskException, NotEnoughManaException {
+        Card card = currentP.getHand().get(Integer.parseInt(pane.getChildren().get(0).getId()) - 1);
+        if (card instanceof Minion) {
+            currentP.placeCard(Integer.parseInt(pane.getChildren().get(0).getId()) - 1);
+        } else {
+            if (card.getManaCost() <= currentP.getMana()) {
+                magicCardPane = pane;
+                magicCard = (MagicCard) card;
+            } else {
+                throw new NotEnoughManaException();
+            }
+        }
+
     }
 }

@@ -5,6 +5,7 @@
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121"
@@ -111,9 +112,6 @@
             <children>
                 <ImageView fx:id="p1" fitHeight="181.0" fitWidth="129.0" layoutY="-2.0" pickOnBounds="true"
                            preserveRatio="true">
-                    <image>
-                        <Image url="@cardimgs/Charmander.png"/>
-                    </image>
                     <effect>
                         <InnerShadow choke="0.71" color="WHITE"/>
                     </effect>
@@ -307,12 +305,12 @@
                 </Label>
             </children>
         </Pane>
-        <Label fx:id="deckSize" layoutX="1053.0" layoutY="486.0" prefHeight="48.0" prefWidth="38.0" textFill="#05ff15">
+        <Label fx:id="deckSize" layoutX="1053.0" layoutY="486.0" prefHeight="48.0" prefWidth="38.0" textFill="#030400">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>
         </Label>
-        <Label fx:id="eDeckSize" layoutX="1053.0" layoutY="129.0" prefHeight="48.0" prefWidth="38.0" textFill="#da0303">
+        <Label fx:id="eDeckSize" layoutX="1053.0" layoutY="129.0" prefHeight="48.0" prefWidth="38.0" textFill="#030400">
             <font>
                 <Font name="System Bold" size="20.0"/>
             </font>
@@ -359,10 +357,31 @@
                 <Font name="System Bold" size="20.0"/>
             </font>
         </Label>
-        <Label fx:id="Name">
+        <Label fx:id="Attacker">
             <font>
                 <Font name="System Bold" size="60.0"/>
             </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="#eeb007"/>
+                        <Stop color="WHITE" offset="1.0"/>
+                    </stops>
+                </LinearGradient>
+            </textFill>
+        </Label>
+        <Label fx:id="MagicCardName" layoutX="10.0" layoutY="60.0">
+            <font>
+                <Font name="System Bold" size="60.0"/>
+            </font>
+            <textFill>
+                <LinearGradient endX="1.0" endY="1.0">
+                    <stops>
+                        <Stop color="WHITE"/>
+                        <Stop color="RED" offset="1.0"/>
+                    </stops>
+                </LinearGradient>
+            </textFill>
         </Label>
     </children>
 </AnchorPane>

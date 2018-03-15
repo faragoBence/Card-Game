@@ -91,6 +91,18 @@ public class Player extends Entity {
         }
     }
 
+    public void abillityDraw() {
+        if (deck.size() > 0) {
+            Card draw = deck.get(0);
+            deck.remove(draw);
+            if (hand.size() < 6) {
+                hand.add(draw);
+            }
+        } else {
+            takeDamage(1);
+        }
+    }
+
     public void startRound() throws EntityIsDeadException {
         manageMana();
         cardDraw();
@@ -107,7 +119,7 @@ public class Player extends Entity {
             throw new NotEnoughManaException();
         }
 
-        if (desk.size() < 5) {
+        if (desk.size() < 5 || card instanceof MagicCard) {
             hand.remove(card);
             currentMana -= card.getManaCost();
             if (card instanceof Minion) {

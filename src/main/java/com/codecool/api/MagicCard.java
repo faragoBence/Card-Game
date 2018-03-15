@@ -30,68 +30,73 @@ public class MagicCard extends Card {
         }
     }
 
+    @Override
+    public void drawCard(Player player, int amount) {
+        for (int i = 0; i < amount; i++) {
+            player.abillityDraw();
+        }
+    }
 
-    public void doMagic(Entity entity) throws WrongTargetException, NoMoreRoomOnDeskException {
+
+    public void doMagic(Entity target) throws WrongTargetException, NoMoreRoomOnDeskException {
         String[] args = getDescription().split(" ");
         switch (args[0]) {
             case "Draw":
-                if (!(entity instanceof Player)) {
+                if (!(target instanceof Player)) {
                     throw new WrongTargetException();
                 }
-                drawCard(((Player) entity), Integer.parseInt(args[1]));
+                drawCard(((Player) target), Integer.parseInt(args[1]));
                 break;
             case "Give":
-                if (!(entity instanceof Minion)) {
+                if (!(target instanceof Minion)) {
                     throw new WrongTargetException();
                 }
-                setHealthAndDamage(((Minion) entity), Integer.parseInt(args[1]));
+                setHealthAndDamage(((Minion) target), Integer.parseInt(args[1]));
                 break;
             case "Do":
-                if (!(entity instanceof Minion)) {
+                if (!(target instanceof Minion)) {
                     throw new WrongTargetException();
                 }
-                doDamage(entity, Integer.parseInt(args[1]));
+                doDamage(target, Integer.parseInt(args[1]));
                 break;
             case "Make":
-                if (!(entity instanceof Minion)) {
+                if (!(target instanceof Minion)) {
                     throw new WrongTargetException();
                 }
-                setHealth(((Minion) entity), Integer.parseInt(args[1]));
+                setHealth(((Minion) target), Integer.parseInt(args[1]));
                 break;
             case "Restore":
-                heal(entity, Integer.parseInt(args[1]));
+                heal(target, Integer.parseInt(args[1]));
                 break;
             case "Summon":
-                if (!(entity instanceof Player)) {
+                if (!(target instanceof Player)) {
                     throw new WrongTargetException();
                 }
                 for (int i = 0; i < Integer.parseInt(args[1]); i++) {
-                    summon(((Player) entity), new Minion(args[2], Integer.parseInt(args[4]), "Summoned", 0, Integer.parseInt(args[7])));
+                    summon(((Player) target), new Minion(args[2], Integer.parseInt(args[4]), "Summoned", 0, Integer.parseInt(args[7])));
                 }
                 break;
             case "Increase":
-                increaseMana((Player) entity);
+                increaseMana((Player) target);
                 break;
             case "Decrease":
-                if (!(entity instanceof Player)) {
+                if (!(target instanceof Player)) {
                     throw new WrongTargetException();
                 }
-                decreaseMana((Player) entity);
+                decreaseMana((Player) target);
                 break;
             case "Deal":
-                if (!(entity instanceof Player)) {
+                if (!(target instanceof Player)) {
                     throw new WrongTargetException();
                 }
-                damageAll((Player) entity, Integer.parseInt(args[1]));
+                damageAll((Player) target, Integer.parseInt(args[1]));
                 break;
             case "Heal":
-                if (!(entity instanceof Player)) {
+                if (!(target instanceof Player)) {
                     throw new WrongTargetException();
                 }
-                healAll((Player) entity, Integer.parseInt(args[3]));
+                healAll((Player) target, Integer.parseInt(args[7]));
                 break;
-            default:
-                heal(1);
         }
         takeDamage(1);
     }

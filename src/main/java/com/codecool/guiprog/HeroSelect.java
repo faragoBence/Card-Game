@@ -122,7 +122,7 @@ public class HeroSelect implements Initializable {
         try {
             Loader.load();
         } catch (IOException ex) {
-            //Valamit majd.
+            //Error handling needed
         }
         Parent p = Loader.getRoot();
         Stage stage = new Stage();

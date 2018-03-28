@@ -2,8 +2,12 @@ package com.codecool.guiprog;
 
 import com.codecool.api.*;
 import com.codecool.api.exceptions.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,6 +21,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -253,6 +258,7 @@ public class GameWindow implements Initializable {
         refreshDesk();
         refreshEDesk();
         refreshHeroes();
+        checkEnd();
     }
 
 
@@ -525,5 +531,38 @@ public class GameWindow implements Initializable {
             }
         }
 
+    }
+
+    public void checkEnd() {
+        if (!currentP.isAlive() || !enemyP.isAlive()) {
+            Player winner;
+            if (!currentP.isAlive()) {
+                winner = enemyP;
+            } else {
+                winner = currentP;
+            }
+            FXMLLoader Loader = new FXMLLoader();
+            Loader.setLocation(getClass().getResource("/EndWindow.fxml"));
+            try {
+                Loader.load();
+            } catch (IOException ex) {
+                //Error handling needed
+            }
+            Parent p = Loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(p));
+            EndGame endGame = Loader.getController();
+            endGame.settleUp(winner);
+            endGame.setThis(stage);
+            stage.setTitle("Stoned Hearth");
+            stage.setResizable(false);
+            stage.setOnCloseRequest(t -> {
+                Platform.exit();
+                System.exit(0);
+            });
+            thisStage.close();
+            stage.show();
+
+        }
     }
 }

@@ -8,9 +8,10 @@
 ###Ghostking
 
 ##End game
-###Break the game somehow if a character dies.
-###New fxml with with new game function.
+###Get rid of duplicated end window.
 
-###? Making the desk and hand size to 7
-### Get rid of Legendary cards, cause the label is out of position.
-### Make mana cristals
+##Mana
+### Make mana cristals.
+
+##Jar
+###Deploy a Jar file of the game.
